@@ -2,233 +2,198 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>قُمَم — نظام يومك القرآني</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a121d">
+<meta name="description" content="نظام يومك القرآني — قُمَم">
+<link rel="manifest" href="manifest.json">
+<title>قُمَم | نظام يومك القرآني</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0a121d;
-    --ink-2:#101e30;
-    --ink-3:#16283c;
-    --ink-4:#1d3148;
-    --line: rgba(201,162,78,.16);
-    --line-strong: rgba(201,162,78,.32);
-    --gold:#c9a24e;
-    --gold-soft:#e4c77b;
-    --gold-dim: rgba(201,162,78,.5);
-    --emerald:#1f5c49;
-    --emerald-soft:#4f9c81;
-    --parchment:#ede3c8;
-    --parchment-dim:#9aa8b8;
-    --teal:#5fb3ab;
-    --ember:#c1622d;
-    --ember-soft:#e08552;
-    --danger:#c1622d;
-    --font-display:'Aref Ruqaa', serif;
-    --font-body:'IBM Plex Sans Arabic', sans-serif;
-    --font-mono:'IBM Plex Mono', monospace;
+    --ink:#0a121d; --ink-2:#101e30; --ink-3:#16283c; --ink-4:#1d3148;
+    --line:rgba(201,162,78,.16); --line-strong:rgba(201,162,78,.32);
+    --gold:#c9a24e; --gold-soft:#e4c77b; --gold-dim:rgba(201,162,78,.5);
+    --emerald:#1f5c49; --emerald-soft:#4f9c81; --parchment:#ede3c8;
+    --parchment-dim:#9aa8b8; --teal:#5fb3ab; --ember:#c1622d; --ember-soft:#e08552;
+    --font-display:'Aref Ruqaa',serif; --font-body:'IBM Plex Sans Arabic',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
     --r-sm:10px; --r-md:16px; --r-lg:22px;
   }
-  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
-  html,body{margin:0; padding:0;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;}
+  input,textarea{-webkit-user-select:text;user-select:text;}
+  html,body{margin:0;padding:0;height:100%;overscroll-behavior:none;}
   body{
     background:
-      radial-gradient(circle at 18% 8%, rgba(201,162,78,.10), transparent 38%),
-      radial-gradient(circle at 88% 78%, rgba(31,92,73,.18), transparent 45%),
+      radial-gradient(circle at 18% 8%,rgba(201,162,78,.10),transparent 38%),
+      radial-gradient(circle at 88% 78%,rgba(31,92,73,.18),transparent 45%),
       var(--ink);
-    color:var(--parchment);
-    font-family:var(--font-body);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
+    color:var(--parchment); font-family:var(--font-body);
+    min-height:100vh; display:flex; justify-content:center; align-items:flex-start;
+    padding-bottom:env(safe-area-inset-bottom,0px);
   }
   body::before{
-    content:"";
-    position:fixed; inset:0;
+    content:"";position:fixed;inset:0;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23c9a24e' stroke-opacity='0.05' stroke-width='1'%3E%3Cpath d='M42 2 L82 42 L42 82 L2 42 Z'/%3E%3Ccircle cx='42' cy='42' r='20'/%3E%3C/g%3E%3C/svg%3E");
-    pointer-events:none;
-    opacity:.6;
-    z-index:0;
+    pointer-events:none;opacity:.6;z-index:0;
   }
-  ::selection{ background:var(--gold); color:var(--ink);}
-  button, input, textarea{ font-family:inherit; color:inherit; }
+  ::selection{background:var(--gold);color:var(--ink);}
+  button,input,textarea{font-family:inherit;color:inherit;border:none;outline:none;}
   .shell{
-    width:100%; max-width:480px; min-height:100vh;
-    position:relative; z-index:1;
-    background: linear-gradient(180deg, rgba(16,30,48,.55), rgba(10,18,29,.2));
+    width:100%;max-width:480px;min-height:100vh;position:relative;z-index:1;
+    background:linear-gradient(180deg,rgba(16,30,48,.55),rgba(10,18,29,.2));
     border-inline:1px solid var(--line);
-    box-shadow: 0 0 80px rgba(0,0,0,.5);
-    display:flex; flex-direction:column;
-    padding-bottom:34px;
+    box-shadow:0 0 80px rgba(0,0,0,.5);
+    display:flex;flex-direction:column;padding-bottom:72px;
   }
-  /* ---------- topbar ---------- */
-  .topbar{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 18px 10px;
-    border-bottom:1px solid var(--line);
-  }
-  .brandwrap{ display:flex; align-items:center; gap:10px;}
-  .brandmark{ width:34px; height:34px; flex:none;}
-  .brandtext .name{ font-family:var(--font-display); font-size:22px; color:var(--gold-soft); line-height:1;}
-  .brandtext .sub{ font-size:10px; color:var(--parchment-dim); letter-spacing:.04em; margin-top:3px;}
-  .topstats{ display:flex; gap:10px; align-items:center; font-family:var(--font-mono);}
-  .topstat{ text-align:center; }
-  .topstat .v{ font-size:15px; color:var(--gold-soft); font-weight:600;}
-  .topstat .l{ font-size:8.5px; color:var(--parchment-dim); letter-spacing:.05em;}
-  /* ---------- nav ---------- */
-  .navrow{
-    display:flex; gap:8px; padding:12px 14px; overflow-x:auto;
-    border-bottom:1px solid var(--line);
-    scrollbar-width:none;
-  }
-  .navrow::-webkit-scrollbar{ display:none; }
-  .navpill{
-    flex:none; display:flex; align-items:center; gap:6px;
-    padding:8px 13px; border-radius:999px; border:1px solid var(--line);
-    background:rgba(255,255,255,.02); color:var(--parchment-dim);
-    font-size:12.5px; cursor:pointer; white-space:nowrap;
-    transition:.18s ease;
-  }
-  .navpill svg{ width:14px; height:14px; }
-  .navpill.active{ background:var(--gold); border-color:var(--gold); color:var(--ink); font-weight:600; }
-  .navpill:not(.active):hover{ border-color:var(--line-strong); color:var(--parchment); }
-  /* ---------- content ---------- */
-  .content{ flex:1; padding:18px 16px 10px; }
-  .fade-in{ animation:fadeIn .35s ease; }
-  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
-  h2.sectitle{ font-family:var(--font-display); font-size:21px; color:var(--gold-soft); margin:2px 0 4px; }
-  p.secsub{ font-size:12px; color:var(--parchment-dim); margin:0 0 16px; line-height:1.7;}
-  .card{
-    background:linear-gradient(160deg, var(--ink-2), var(--ink-3));
-    border:1px solid var(--line); border-radius:var(--r-md);
-    padding:16px; margin-bottom:14px;
-  }
-  .card-title{ font-size:13.5px; color:var(--gold-soft); font-weight:600; margin:0 0 10px; display:flex; align-items:center; justify-content:space-between;}
-  .tag{ font-size:10px; padding:3px 8px; border-radius:999px; border:1px solid var(--line-strong); color:var(--parchment-dim);}
-  .tag.now{ background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:700;}
-  .tag.late{ background:var(--ember); color:var(--ink); border-color:var(--ember); font-weight:700;}
-  .tag.done{ background:var(--emerald); color:var(--parchment); border-color:var(--emerald);}
-  /* ---------- rosette (signature element) ---------- */
-  .rosette-wrap{ display:flex; justify-content:center; padding:6px 0 10px;}
-  .rosette text{ font-family:var(--font-mono); }
-  /* ---------- buttons ---------- */
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:6px;
-    padding:11px 16px; border-radius:12px; border:1px solid transparent;
-    font-size:13.5px; font-weight:600; cursor:pointer; width:100%;
-    transition:.15s ease;
-  }
-  .btn-gold{ background:linear-gradient(180deg, var(--gold-soft), var(--gold)); color:var(--ink); }
-  .btn-gold:hover{ filter:brightness(1.08); }
-  .btn-ghost{ background:transparent; border-color:var(--line-strong); color:var(--parchment); }
-  .btn-ghost:hover{ border-color:var(--gold-dim); color:var(--gold-soft); }
-  .btn-emerald{ background:var(--emerald); color:var(--parchment); }
-  .btn-ember{ background:transparent; border-color:var(--ember); color:var(--ember-soft); }
-  .btn-row{ display:flex; gap:8px; }
-  .btn-sm{ padding:8px 10px; font-size:12px; width:auto; }
-  /* ---------- stat chips ---------- */
-  .chiprow{ display:flex; gap:8px; margin-bottom:14px; }
-  .chip{ flex:1; background:var(--ink-2); border:1px solid var(--line); border-radius:var(--r-sm); padding:10px 8px; text-align:center;}
-  .chip .v{ font-family:var(--font-mono); font-size:16px; color:var(--gold-soft); font-weight:600;}
-  .chip .l{ font-size:9.5px; color:var(--parchment-dim); margin-top:2px;}
-  /* ---------- list items ---------- */
-  .list-item{
-    display:flex; align-items:center; gap:10px; padding:10px 0;
-    border-bottom:1px solid var(--line);
-  }
-  .list-item:last-child{ border-bottom:none; }
-  .dot{ width:8px; height:8px; border-radius:50%; flex:none; }
-  .li-time{ font-family:var(--font-mono); font-size:11.5px; color:var(--parchment-dim); width:42px; flex:none;}
-  .li-label{ flex:1; font-size:13px; }
-  .li-label .note{ display:block; font-size:10.5px; color:var(--parchment-dim); margin-top:2px;}
-  /* ---------- schedule timeline ---------- */
-  .timeline-item{ display:flex; gap:12px; }
-  .tl-time{ font-family:var(--font-mono); font-size:11px; color:var(--gold-soft); width:46px; flex:none; padding-top:2px; cursor:pointer;}
-  .tl-time input{ width:54px; background:var(--ink-3); border:1px solid var(--line-strong); border-radius:6px; color:var(--parchment); font-family:var(--font-mono); font-size:11px; padding:2px;}
-  .tl-rail{ display:flex; flex-direction:column; align-items:center; flex:none; width:14px;}
-  .tl-dot{ width:10px; height:10px; border-radius:50%; border:2px solid var(--line-strong); background:var(--ink-2); margin-top:3px;}
-  .tl-dot.now{ background:var(--gold); border-color:var(--gold); box-shadow:0 0 0 4px rgba(201,162,78,.18);}
-  .tl-dot.past{ background:var(--emerald-soft); border-color:var(--emerald-soft);}
-  .tl-line{ flex:1; width:1px; background:var(--line); margin:2px 0;}
-  .tl-body{ flex:1; padding-bottom:18px; }
-  .tl-label{ font-size:13px; }
-  .tl-note{ font-size:10.5px; color:var(--parchment-dim); margin-top:2px;}
-  /* ---------- coach stage ---------- */
-  .stage-dots{ display:flex; gap:5px; justify-content:center; margin-bottom:14px;}
-  .stage-dot{ width:7px; height:7px; border-radius:50%; background:var(--ink-4);}
-  .stage-dot.on{ background:var(--gold);}
-  .stage-dot.past{ background:var(--emerald-soft);}
-  .counter-circle{
-    width:120px; height:120px; border-radius:50%; margin:8px auto 16px;
-    border:2px solid var(--line-strong); display:flex; flex-direction:column;
-    align-items:center; justify-content:center; background:var(--ink-2);
-  }
-  .counter-circle .n{ font-family:var(--font-mono); font-size:30px; color:var(--gold-soft); font-weight:600;}
-  .counter-circle .lab{ font-size:10px; color:var(--parchment-dim);}
-  /* ---------- map ---------- */
-  .map-row{ display:flex; align-items:center; gap:8px; padding:5px 0; }
-  .map-juz-label{ width:60px; flex:none; font-size:11px; color:var(--parchment-dim); font-family:var(--font-mono);}
-  .map-cells{ display:flex; gap:3px; flex:1; }
-  .map-cell{ flex:1; aspect-ratio:1; border-radius:4px; cursor:pointer; border:1px solid rgba(0,0,0,.2);}
-  .legend{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
-  .legend-item{ display:flex; align-items:center; gap:5px; font-size:10.5px; color:var(--parchment-dim);}
-  .legend-sw{ width:10px; height:10px; border-radius:3px;}
-  /* ---------- water/sleep ---------- */
-  .water-row{ display:flex; align-items:center; gap:14px; }
-  .water-cup{ width:54px; height:70px; flex:none; }
-  .stepper{ display:flex; align-items:center; gap:10px; }
-  .stepper button{ width:30px; height:30px; border-radius:8px; border:1px solid var(--line-strong); background:var(--ink-3); color:var(--gold-soft); font-size:16px; cursor:pointer;}
-  /* ---------- achievements ---------- */
-  .ach-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-  .ach-card{ background:var(--ink-2); border:1px solid var(--line); border-radius:var(--r-sm); padding:12px 8px; text-align:center; opacity:.35;}
-  .ach-card.unlocked{ opacity:1; border-color:var(--gold-dim); }
-  .ach-card .ic{ font-size:22px; margin-bottom:6px;}
-  .ach-card .t{ font-size:10px; line-height:1.4; color:var(--parchment);}
-  /* ---------- modal ---------- */
-  .modal-overlay{ position:fixed; inset:0; background:rgba(5,9,15,.72); backdrop-filter:blur(2px); display:flex; align-items:flex-end; justify-content:center; z-index:50;}
-  .modal{ width:100%; max-width:480px; background:var(--ink-2); border:1px solid var(--line-strong); border-radius:22px 22px 0 0; padding:20px 18px 26px; max-height:85vh; overflow-y:auto;}
-  .modal-handle{ width:36px; height:4px; background:var(--line-strong); border-radius:99px; margin:0 auto 14px;}
-  /* ---------- fab ---------- */
-  .fatigue-fab{
-    position:fixed; bottom:18px; left:50%; transform:translateX(calc(-240px + 18px));
-    width:50px; height:50px; border-radius:50%; background:var(--ember);
-    display:flex; align-items:center; justify-content:center; cursor:pointer;
-    box-shadow:0 6px 18px rgba(193,98,45,.4); z-index:30; border:2px solid var(--ink);
-  }
-  @media (max-width:480px){ .fatigue-fab{ left:16px; transform:none;} }
-  .fatigue-fab svg{ width:22px; height:22px; color:var(--ink);}
-  /* ---------- toast ---------- */
-  .toast{ position:fixed; bottom:84px; left:50%; transform:translateX(-50%); background:var(--gold); color:var(--ink); padding:9px 18px; border-radius:999px; font-size:12.5px; font-weight:600; z-index:60; box-shadow:0 6px 18px rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:.25s ease;}
-  .toast.show{ opacity:1; transform:translateX(-50%) translateY(-4px); }
-  /* ---------- misc ---------- */
-  .sel-row{ display:flex; gap:6px; flex-wrap:wrap; }
-  .sel-btn{ padding:7px 12px; border-radius:9px; border:1px solid var(--line-strong); background:var(--ink-3); color:var(--parchment-dim); font-size:11.5px; cursor:pointer;}
-  .sel-btn.active{ background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:600;}
-  .field-label{ font-size:11px; color:var(--parchment-dim); margin-bottom:6px; display:block;}
-  .input-text{ width:100%; background:var(--ink-3); border:1px solid var(--line-strong); border-radius:9px; padding:9px 11px; font-size:13px;}
-  .progress-bar{ height:8px; background:var(--ink-4); border-radius:99px; overflow:hidden;}
-  .progress-fill{ height:100%; background:linear-gradient(90deg, var(--emerald-soft), var(--teal)); border-radius:99px; transition:width .4s ease;}
-  .empty-state{ text-align:center; padding:30px 10px; color:var(--parchment-dim); font-size:12.5px;}
-  .loading-screen{ position:fixed; inset:0; background:var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:100; gap:14px;}
-  .loading-screen .brandtext .name{ font-size:30px; }
-  .spinner{ width:26px; height:26px; border-radius:50%; border:2px solid var(--line-strong); border-top-color:var(--gold); animation:spin 1s linear infinite;}
-  @keyframes spin{ to{ transform:rotate(360deg);} }
-  .divider{ height:1px; background:var(--line); margin:14px 0;}
-  a.linklike{ color:var(--gold-soft); cursor:pointer; text-decoration:underline; text-underline-offset:3px;}
-  ::-webkit-scrollbar{ width:6px; }
-  ::-webkit-scrollbar-thumb{ background:var(--line-strong); border-radius:99px; }
-  @media (prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important; } }
+  /* --- topbar --- */
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;border-bottom:1px solid var(--line);}
+  .brandwrap{display:flex;align-items:center;gap:8px;}
+  .brandmark{width:30px;height:30px;flex:none;}
+  .brandtext .name{font-family:var(--font-display);font-size:20px;color:var(--gold-soft);line-height:1;}
+  .brandtext .sub{font-size:9.5px;color:var(--parchment-dim);letter-spacing:.04em;margin-top:2px;}
+  .topright{display:flex;gap:10px;align-items:center;}
+  .topstat{text-align:center;}
+  .topstat .v{font-family:var(--font-mono);font-size:14px;color:var(--gold-soft);font-weight:600;}
+  .topstat .l{font-size:8px;color:var(--parchment-dim);letter-spacing:.05em;}
+  .live-clock{font-family:var(--font-mono);font-size:12px;color:var(--teal);letter-spacing:.06em;}
+  /* --- nav --- */
+  .navrow{display:flex;gap:7px;padding:10px 12px;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:none;}
+  .navrow::-webkit-scrollbar{display:none;}
+  .navpill{flex:none;display:flex;align-items:center;gap:5px;padding:7px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--parchment-dim);font-size:12px;cursor:pointer;white-space:nowrap;transition:.18s ease;}
+  .navpill svg{width:13px;height:13px;}
+  .navpill.active{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:600;}
+  .navpill:not(.active):hover{border-color:var(--line-strong);color:var(--parchment);}
+  /* --- content --- */
+  .content{flex:1;padding:16px 15px 8px;overflow-y:auto;}
+  .fade-in{animation:fadeIn .3s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:none;}}
+  h2.sectitle{font-family:var(--font-display);font-size:20px;color:var(--gold-soft);margin:2px 0 3px;}
+  p.secsub{font-size:11.5px;color:var(--parchment-dim);margin:0 0 14px;line-height:1.75;}
+  .card{background:linear-gradient(160deg,var(--ink-2),var(--ink-3));border:1px solid var(--line);border-radius:var(--r-md);padding:15px;margin-bottom:12px;}
+  .card-title{font-size:12.5px;color:var(--gold-soft);font-weight:600;margin:0 0 9px;display:flex;align-items:center;justify-content:space-between;}
+  .tag{font-size:10px;padding:3px 8px;border-radius:999px;border:1px solid var(--line-strong);color:var(--parchment-dim);}
+  .tag.now{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;}
+  .tag.done{background:var(--emerald);color:var(--parchment);border-color:var(--emerald);}
+  /* --- rosette --- */
+  .rosette-wrap{display:flex;justify-content:center;padding:4px 0 8px;}
+  /* --- buttons --- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 15px;border-radius:11px;border:1px solid transparent;font-size:13px;font-weight:600;cursor:pointer;width:100%;transition:.15s ease;}
+  .btn-gold{background:linear-gradient(180deg,var(--gold-soft),var(--gold));color:var(--ink);}
+  .btn-gold:hover{filter:brightness(1.08);}
+  .btn-ghost{background:transparent;border-color:var(--line-strong);color:var(--parchment);}
+  .btn-ghost:hover{border-color:var(--gold-dim);color:var(--gold-soft);}
+  .btn-emerald{background:var(--emerald);color:var(--parchment);}
+  .btn-ember{background:transparent;border-color:var(--ember);color:var(--ember-soft);}
+  .btn-row{display:flex;gap:7px;}
+  .btn-sm{padding:7px 10px;font-size:11.5px;width:auto;}
+  /* --- chips --- */
+  .chiprow{display:flex;gap:7px;margin-bottom:12px;}
+  .chip{flex:1;background:var(--ink-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:9px 7px;text-align:center;}
+  .chip .v{font-family:var(--font-mono);font-size:15px;color:var(--gold-soft);font-weight:600;}
+  .chip .l{font-size:9px;color:var(--parchment-dim);margin-top:2px;}
+  /* --- list items --- */
+  .list-item{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--line);}
+  .list-item:last-child{border-bottom:none;}
+  .dot{width:7px;height:7px;border-radius:50%;flex:none;}
+  .li-time{font-family:var(--font-mono);font-size:11px;color:var(--parchment-dim);width:40px;flex:none;}
+  .li-label{flex:1;font-size:12.5px;}
+  .li-label .note{display:block;font-size:10px;color:var(--parchment-dim);margin-top:2px;}
+  /* --- timeline --- */
+  .timeline-item{display:flex;gap:10px;}
+  .tl-time{font-family:var(--font-mono);font-size:10.5px;color:var(--gold-soft);width:44px;flex:none;padding-top:2px;cursor:pointer;}
+  .tl-time input{width:52px;background:var(--ink-3);border:1px solid var(--line-strong);border-radius:6px;color:var(--parchment);font-family:var(--font-mono);font-size:10px;padding:2px 4px;}
+  .tl-rail{display:flex;flex-direction:column;align-items:center;flex:none;width:13px;}
+  .tl-dot{width:9px;height:9px;border-radius:50%;border:2px solid var(--line-strong);background:var(--ink-2);margin-top:3px;}
+  .tl-dot.now{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,162,78,.18);}
+  .tl-dot.past{background:var(--emerald-soft);border-color:var(--emerald-soft);}
+  .tl-line{flex:1;width:1px;background:var(--line);margin:2px 0;}
+  .tl-body{flex:1;padding-bottom:16px;}
+  .tl-label{font-size:12.5px;}
+  .tl-note{font-size:10px;color:var(--parchment-dim);margin-top:2px;}
+  /* --- coach --- */
+  .stage-dots{display:flex;gap:5px;justify-content:center;margin-bottom:12px;}
+  .stage-dot{width:7px;height:7px;border-radius:50%;background:var(--ink-4);}
+  .stage-dot.on{background:var(--gold);}
+  .stage-dot.past{background:var(--emerald-soft);}
+  .counter-circle{width:110px;height:110px;border-radius:50%;margin:8px auto 14px;border:2px solid var(--line-strong);display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--ink-2);}
+  .counter-circle .n{font-family:var(--font-mono);font-size:28px;color:var(--gold-soft);font-weight:600;}
+  .counter-circle .lab{font-size:9.5px;color:var(--parchment-dim);}
+  /* --- map --- */
+  .map-row{display:flex;align-items:center;gap:7px;padding:4px 0;}
+  .map-juz-label{width:56px;flex:none;font-size:10.5px;color:var(--parchment-dim);font-family:var(--font-mono);}
+  .map-cells{display:flex;gap:3px;flex:1;}
+  .map-cell{flex:1;aspect-ratio:1;border-radius:3px;cursor:pointer;border:1px solid rgba(0,0,0,.2);transition:.12s ease;}
+  .map-cell:hover{transform:scale(1.3);z-index:5;}
+  .legend{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px;}
+  .legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--parchment-dim);}
+  .legend-sw{width:10px;height:10px;border-radius:3px;}
+  /* --- health --- */
+  .water-row{display:flex;align-items:center;gap:13px;}
+  .water-cup{width:50px;height:65px;flex:none;}
+  .stepper{display:flex;align-items:center;gap:10px;}
+  .stepper button{width:28px;height:28px;border-radius:7px;border:1px solid var(--line-strong);background:var(--ink-3);color:var(--gold-soft);font-size:15px;cursor:pointer;}
+  /* --- achievements --- */
+  .ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
+  .ach-card{background:var(--ink-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 7px;text-align:center;opacity:.3;}
+  .ach-card.unlocked{opacity:1;border-color:var(--gold-dim);}
+  .ach-card .ic{font-size:20px;margin-bottom:5px;}
+  .ach-card .t{font-size:9.5px;line-height:1.4;color:var(--parchment);}
+  /* --- modal --- */
+  .modal-overlay{position:fixed;inset:0;background:rgba(5,9,15,.75);backdrop-filter:blur(3px);display:flex;align-items:flex-end;justify-content:center;z-index:50;}
+  .modal{width:100%;max-width:480px;background:var(--ink-2);border:1px solid var(--line-strong);border-radius:22px 22px 0 0;padding:18px 16px 24px;max-height:88vh;overflow-y:auto;}
+  .modal-handle{width:34px;height:4px;background:var(--line-strong);border-radius:99px;margin:0 auto 13px;}
+  /* --- fab --- */
+  .fatigue-fab{position:fixed;bottom:18px;left:50%;transform:translateX(calc(-240px + 16px));width:46px;height:46px;border-radius:50%;background:var(--ember);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 16px rgba(193,98,45,.4);z-index:30;border:2px solid var(--ink);}
+  @media(max-width:480px){.fatigue-fab{left:14px;transform:none;}}
+  .fatigue-fab svg{width:20px;height:20px;color:var(--ink);}
+  /* --- toast --- */
+  .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--ink);padding:8px 16px;border-radius:999px;font-size:12px;font-weight:600;z-index:60;box-shadow:0 6px 16px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.2s ease;white-space:nowrap;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px);}
+  /* --- misc --- */
+  .sel-row{display:flex;gap:5px;flex-wrap:wrap;}
+  .sel-btn{padding:6px 11px;border-radius:8px;border:1px solid var(--line-strong);background:var(--ink-3);color:var(--parchment-dim);font-size:11px;cursor:pointer;}
+  .sel-btn.active{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:600;}
+  .field-label{font-size:11px;color:var(--parchment-dim);margin-bottom:5px;display:block;}
+  .input-text{width:100%;background:var(--ink-3);border:1px solid var(--line-strong);border-radius:8px;padding:8px 10px;font-size:13px;}
+  .progress-bar{height:7px;background:var(--ink-4);border-radius:99px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--emerald-soft),var(--teal));border-radius:99px;transition:width .4s ease;}
+  .divider{height:1px;background:var(--line);margin:12px 0;}
+  .week-dots{display:flex;gap:5px;justify-content:center;margin-bottom:12px;}
+  .week-dot{width:8px;height:8px;border-radius:50%;background:var(--ink-4);transition:.2s ease;}
+  .week-dot.today-dot{width:10px;height:10px;box-shadow:0 0 0 2px var(--gold);}
+  /* --- loading --- */
+  .loading-screen{position:fixed;inset:0;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;gap:12px;}
+  .spinner{width:24px;height:24px;border-radius:50%;border:2px solid var(--line-strong);border-top-color:var(--gold);animation:spin 1s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  /* --- verse --- */
+  .verse-card{background:linear-gradient(135deg,rgba(31,92,73,.3),rgba(10,18,29,.6));border:1px solid rgba(79,156,129,.25);border-radius:var(--r-md);padding:14px;margin-bottom:12px;text-align:center;}
+  .verse-text{font-family:var(--font-display);font-size:16px;color:var(--gold-soft);line-height:1.9;margin-bottom:6px;}
+  .verse-ref{font-size:10px;color:var(--parchment-dim);letter-spacing:.04em;}
+  /* --- about --- */
+  .about-hero{display:flex;flex-direction:column;align-items:center;padding:28px 0 18px;gap:8px;}
+  .about-hero .name{font-family:var(--font-display);font-size:34px;color:var(--gold-soft);}
+  .about-hero .subtitle{font-size:12px;color:var(--parchment-dim);letter-spacing:.06em;}
+  .version-badge{font-family:var(--font-mono);font-size:10.5px;background:var(--ink-3);border:1px solid var(--line-strong);display:inline-block;padding:3px 10px;border-radius:999px;color:var(--gold-dim);}
+  .author-card{background:linear-gradient(135deg,var(--ink-4),var(--ink-3));border:1px solid var(--gold-dim);border-radius:var(--r-md);padding:18px;margin-bottom:12px;text-align:center;}
+  .author-name{font-family:var(--font-display);font-size:22px;color:var(--gold-soft);margin-top:4px;}
+  .copyright-row{text-align:center;padding:8px 0;font-size:11px;color:var(--parchment-dim);}
+  ::-webkit-scrollbar{width:4px;}
+  ::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:99px;}
+  @media(prefers-reduced-motion:reduce){*{animation-duration:.001s !important;transition-duration:.001s !important;}}
 </style>
 </head>
 <body>
 
 <div id="loading" class="loading-screen">
-  <svg class="brandmark" viewBox="0 0 40 40"><g fill="none" stroke="#c9a24e" stroke-width="1.4"><rect x="6" y="6" width="28" height="28" transform="rotate(0 20 20)"/><rect x="6" y="6" width="28" height="28" transform="rotate(45 20 20)"/><circle cx="20" cy="20" r="9"/></g></svg>
-  <div class="brandtext"><div class="name">قُمَم</div></div>
+  <svg width="60" height="60" viewBox="0 0 100 100"><g transform="translate(50,50)" fill="none" stroke="#c9a24e" stroke-width="1.6"><rect x="-42" y="-42" width="84" height="84"/><rect x="-42" y="-42" width="84" height="84" transform="rotate(45)"/><circle r="32" stroke-opacity=".5"/></g></svg>
+  <div style="font-family:'Aref Ruqaa',serif;font-size:28px;color:#e4c77b;">قُمَم</div>
   <div class="spinner"></div>
+  <div style="font-size:9.5px;color:#9aa8b8;margin-top:8px;letter-spacing:.04em;">تصميم وتطوير: عبدالرحمن محمد ضو</div>
 </div>
 
 <div class="shell" id="shell" style="display:none;">
@@ -237,1025 +202,509 @@
       <svg class="brandmark" viewBox="0 0 40 40"><g fill="none" stroke="#c9a24e" stroke-width="1.4"><rect x="6" y="6" width="28" height="28"/><rect x="6" y="6" width="28" height="28" transform="rotate(45 20 20)"/><circle cx="20" cy="20" r="9"/></g></svg>
       <div class="brandtext"><div class="name">قُمَم</div><div class="sub">نظام يومك القرآني</div></div>
     </div>
-    <div class="topstats">
+    <div class="topright">
       <div class="topstat"><div class="v" id="topDay">1/30</div><div class="l">اليوم</div></div>
       <div class="topstat"><div class="v" id="topStreak">0🔥</div><div class="l">تتابع</div></div>
+      <div class="live-clock" id="liveClock">--:--</div>
     </div>
   </div>
-
   <div class="navrow" id="navrow"></div>
-
   <div class="content" id="content"></div>
 </div>
 
-<div class="fatigue-fab" id="fatigueFab" title="نمط الفتور" onclick="openFatigue()" style="display:none;">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3 C8 9 6 11 6 15 a6 6 0 0 0 12 0 C18 11 16 9 12 3 Z"/></svg>
+<div class="fatigue-fab" id="fatigueFab" onclick="openFatigue()" style="display:none;" title="نمط الفتور">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3C8 9 6 11 6 15a6 6 0 0 0 12 0c0-4-2-6-6-12Z"/></svg>
 </div>
-
 <div id="modalRoot"></div>
 <div class="toast" id="toast"></div>
 
 <script>
-/* =========================================================
-   قُمَم — Quran memorization operating panel
-   Single-file vanilla JS app. State persisted via window.storage.
-   ========================================================= */
+/* ===================================================
+   قُمَم v1.0.0 — نظام يومك القرآني
+   تصميم وتطوير: عبدالرحمن محمد ضو
+   © 2025 جميع الحقوق محفوظة
+   =================================================== */
 
-/* ---------------- constants ---------------- */
+const APP_VERSION = "1.0.0";
+const APP_AUTHOR = "عبدالرحمن محمد ضو";
+const APP_YEAR = "2025";
 const TOTAL_DAYS = 30;
-const JUZ_COUNT = 30;
-const THUMN_PER_JUZ = 8;
-const STAGE_LABELS = ["قريب","متوسط","أسبوعي","بعيد","إدماج نهائي"];
-const STAGE_OFFSETS = [1,3,7,15,30];
+
+// Daily motivational verses
+const DAILY_VERSES = [
+  {text:"وَلَقَدۡ يَسَّرۡنَا ٱلۡقُرۡءَانَ لِلذِّكۡرِ فَهَلۡ مِن مُّدَّكِرٍ",ref:"القمر: 17"},
+  {text:"إِنَّ هَٰذَا ٱلۡقُرۡءَانَ يَهۡدِي لِلَّتِي هِيَ أَقۡوَمُ",ref:"الإسراء: 9"},
+  {text:"ٱلَّذِينَ ءَاتَيۡنَٰهُمُ ٱلۡكِتَٰبَ يَتۡلُونَهُۥ حَقَّ تِلَاوَتِهِۦ",ref:"البقرة: 121"},
+  {text:"بَلۡ هُوَ ءَايَٰتٌ بَيِّنَٰتٌ فِي صُدُورِ ٱلَّذِينَ أُوتُواْ ٱلۡعِلۡمَ",ref:"العنكبوت: 49"},
+  {text:"وَنُنَزِّلُ مِنَ ٱلۡقُرۡءَانِ مَا هُوَ شِفَآءٌ وَرَحۡمَةٌ لِّلۡمُؤۡمِنِينَ",ref:"الإسراء: 82"},
+  {text:"أَفَلَا يَتَدَبَّرُونَ ٱلۡقُرۡءَانَۚ وَلَوۡ كَانَ مِنۡ عِندِ غَيۡرِ ٱللَّهِ",ref:"النساء: 82"},
+  {text:"ٱلَّذِينَ يَتۡلُونَ كِتَٰبَ ٱللَّهِ وَأَقَامُواْ ٱلصَّلَوٰةَ",ref:"فاطر: 29"},
+];
 
 const SCHEDULE = [
-  {t:"04:05", label:"الاستيقاظ + وضوء", type:"prep", note:"ابدأ قبل الفجر مباشرة"},
-  {t:"04:15", label:"صلاة الفجر", type:"prayer", note:""},
-  {t:"04:30", label:"ماء + تنشيط ذهني (بلا شاشة)", type:"prep", note:"الدماغ بعد الفجر في أعلى صفاء"},
-  {t:"04:35", label:"حفظ جديد", type:"memorize", note:"أثمن 75 دقيقة في يومك بالكامل"},
-  {t:"05:50", label:"استراحة + أذكار الصباح", type:"rest", note:""},
-  {t:"06:05", label:"مراجعة قريبة (أمس وما قبله)", type:"review-near", note:"أخطر فترة نسيان: أول 48 ساعة"},
-  {t:"06:40", label:"فطور صحي", type:"food", note:"بيض + خبز أسمر + تمر"},
-  {t:"07:05", label:"وقت مرن + رياضة خفيفة اختيارية", type:"free", note:"راحة ذهنية كاملة من القرآن"},
-  {t:"12:35", label:"تحضير لصلاة الظهر", type:"prep", note:""},
-  {t:"13:05", label:"صلاة الظهر", type:"prayer", note:""},
-  {t:"13:25", label:"غداء خفيف", type:"food", note:"تجنّب الدسم الثقيل"},
-  {t:"14:00", label:"مراجعة المحفوظ القديم", type:"review-old", note:"إحياء ما قبل الانقطاع"},
-  {t:"14:40", label:"قيلولة", type:"nap", note:"غير قابلة للتفاوض"},
-  {t:"15:20", label:"استيقاظ + غسل وجه", type:"prep", note:""},
-  {t:"15:30", label:"مراجعة وتلميع ثمن العرض", type:"review-polish", note:"حوّل جلسة المشروع لتثبيت لا حفظ من الصفر"},
-  {t:"16:10", label:"التوجه لمقر المشروع", type:"transit", note:""},
-  {t:"16:50", label:"صلاة العصر", type:"prayer", note:""},
-  {t:"17:05", label:"جلسة مشروع قمم القرافي", type:"project", note:"تسميع الأثمان الأربعة أمام الشيخ"},
-  {t:"21:45", label:"صلاة العشاء (ضمن المشروع)", type:"prayer", note:""},
-  {t:"22:00", label:"العودة للمنزل", type:"transit", note:""},
-  {t:"22:20", label:"عشاء خفيف جداً", type:"food", note:""},
-  {t:"22:35", label:"تثبيت ما قبل النوم", type:"consolidate", note:"كرر همساً ثمن اليوم + اربطه بثمن الأمس"},
-  {t:"22:55", label:"أذكار النوم + إطفاء الشاشات", type:"rest", note:""},
-  {t:"23:05", label:"النوم", type:"sleep", note:""}
+  {t:"04:05",label:"الاستيقاظ + وضوء",type:"prep",note:"ابدأ قبل الفجر مباشرة"},
+  {t:"04:15",label:"صلاة الفجر",type:"prayer",note:""},
+  {t:"04:30",label:"ماء + تنشيط ذهني (بلا شاشة)",type:"prep",note:"الدماغ بعد الفجر في أعلى صفاء"},
+  {t:"04:35",label:"حفظ جديد",type:"memorize",note:"أثمن 75 دقيقة في يومك"},
+  {t:"05:50",label:"استراحة + أذكار الصباح",type:"rest",note:""},
+  {t:"06:05",label:"مراجعة قريبة (أمس وما قبله)",type:"review-near",note:"أخطر فترة نسيان: أول 48 ساعة"},
+  {t:"06:40",label:"فطور صحي",type:"food",note:"بيض + خبز أسمر + تمر"},
+  {t:"07:05",label:"وقت مرن + رياضة خفيفة اختيارية",type:"free",note:"راحة ذهنية كاملة من القرآن"},
+  {t:"12:35",label:"تحضير لصلاة الظهر",type:"prep",note:""},
+  {t:"13:05",label:"صلاة الظهر",type:"prayer",note:""},
+  {t:"13:25",label:"غداء خفيف",type:"food",note:"تجنّب الدسم الثقيل"},
+  {t:"14:00",label:"مراجعة المحفوظ القديم",type:"review-old",note:"إحياء ما قبل الانقطاع"},
+  {t:"14:40",label:"قيلولة",type:"nap",note:"غير قابلة للتفاوض"},
+  {t:"15:20",label:"استيقاظ + غسل وجه",type:"prep",note:""},
+  {t:"15:30",label:"مراجعة وتلميع ثمن العرض",type:"review-polish",note:"حوّل جلسة المشروع من حفظ لتثبيت"},
+  {t:"16:10",label:"التوجه لمقر المشروع",type:"transit",note:""},
+  {t:"16:50",label:"صلاة العصر",type:"prayer",note:""},
+  {t:"17:05",label:"جلسة مشروع قمم القرافي",type:"project",note:"تسميع الأثمان الأربعة أمام الشيخ"},
+  {t:"21:45",label:"صلاة العشاء (ضمن المشروع)",type:"prayer",note:""},
+  {t:"22:00",label:"العودة للمنزل",type:"transit",note:""},
+  {t:"22:20",label:"عشاء خفيف جداً",type:"food",note:""},
+  {t:"22:35",label:"تثبيت ما قبل النوم",type:"consolidate",note:"كرر همساً ثمن اليوم + اربطه بثمن الأمس"},
+  {t:"22:55",label:"أذكار النوم + إطفاء الشاشات",type:"rest",note:""},
+  {t:"23:05",label:"النوم",type:"sleep",note:""}
 ];
 
-const TYPE_META = {
-  prep:{color:"#9aa8b8", icon:"prep"}, prayer:{color:"#5fb3ab", icon:"prayer"},
-  memorize:{color:"#c9a24e", icon:"book"}, rest:{color:"#7c8aa0", icon:"rest"},
-  "review-near":{color:"#4f9c81", icon:"refresh"}, "review-old":{color:"#1f5c49", icon:"refresh"},
-  "review-polish":{color:"#e4c77b", icon:"refresh"}, food:{color:"#c1622d", icon:"food"},
-  free:{color:"#516074", icon:"free"}, nap:{color:"#7c8aa0", icon:"nap"},
-  transit:{color:"#516074", icon:"transit"}, project:{color:"#c9a24e", icon:"flag"},
-  consolidate:{color:"#e4c77b", icon:"moon"}, sleep:{color:"#3a4a60", icon:"moon"}
+const TYPE_META={
+  prep:{color:"#9aa8b8"},prayer:{color:"#5fb3ab"},memorize:{color:"#c9a24e"},
+  rest:{color:"#7c8aa0"},"review-near":{color:"#4f9c81"},"review-old":{color:"#1f5c49"},
+  "review-polish":{color:"#e4c77b"},food:{color:"#c1622d"},free:{color:"#516074"},
+  nap:{color:"#7c8aa0"},transit:{color:"#516074"},project:{color:"#c9a24e"},
+  consolidate:{color:"#e4c77b"},sleep:{color:"#3a4a60"}
 };
 
-const EVAL_CRITERIA = [
-  {key:"fluency", label:"جودة التسميع (طلاقة بلا تردد)", weight:30},
-  {key:"quantity", label:"الالتزام بعدد الأثمان المخطط", weight:20},
-  {key:"reviews", label:"إنجاز المراجعة (قريبة + قديمة)", weight:20},
-  {key:"schedule", label:"الانضباط بالجدول (نوم/طعام/قيلولة)", weight:15},
-  {key:"focus", label:"الحضور الذهني وعدم التشتت", weight:15}
+const EVAL_CRITERIA=[
+  {key:"fluency",label:"جودة التسميع (طلاقة بلا تردد)",weight:30},
+  {key:"quantity",label:"الالتزام بعدد الأثمان المخطط",weight:20},
+  {key:"reviews",label:"إنجاز المراجعة (قريبة + قديمة)",weight:20},
+  {key:"schedule",label:"الانضباط بالجدول (نوم/طعام/قيلولة)",weight:15},
+  {key:"focus",label:"الحضور الذهني وعدم التشتت",weight:15}
 ];
 
-const ACHIEVEMENTS = [
-  {id:"first_day", ic:"🌙", t:"أول خطوة", cond:s=>Object.keys(s.daily).some(d=>(s.daily[d].athmaanDone||0)>0)},
-  {id:"streak3", ic:"🔥", t:"ثلاثة أيام متتابعة", cond:s=>computeStreak(s)>=3},
-  {id:"streak7", ic:"🔥", t:"أسبوع الثبات", cond:s=>computeStreak(s)>=7},
-  {id:"streak14", ic:"⚡", t:"أسبوعان متواصلان", cond:s=>computeStreak(s)>=14},
-  {id:"day15", ic:"🌗", t:"نصف الطريق", cond:s=>currentDayNumber(s)>=15},
-  {id:"day30", ic:"🏔️", t:"قمة الثلاثين", cond:s=>currentDayNumber(s)>=30},
-  {id:"zero_hes", ic:"🎯", t:"صفر تردد في يوم", cond:s=>Object.values(s.daily).some(d=>(d.hesitationCount===0)&&(d.athmaanDone||0)>0)},
-  {id:"week_zero_hes", ic:"🏹", t:"أسبوع بلا تردد", cond:s=>weekZeroHesitation(s)},
-  {id:"review10", ic:"🔁", t:"حارس المراجعة (10)", cond:s=>s.reviews.filter(r=>r.status==="done").length>=10},
-  {id:"review40", ic:"🔁", t:"حارس المراجعة (40)", cond:s=>s.reviews.filter(r=>r.status==="done").length>=40},
-  {id:"thumn_master1", ic:"✨", t:"أول إدماج كامل", cond:s=>Object.values(s.quranMap).some(v=>v==="mastered")},
-  {id:"quarter_juz30", ic:"📖", t:"نصف جزء عمّ", cond:s=>countStatus(s,"j30",4)},
-  {id:"score90", ic:"💯", t:"تقييم ممتاز (90+)", cond:s=>Object.values(s.daily).some(d=>(d.score||0)>=90)},
-  {id:"water7", ic:"💧", t:"منضبط الماء (7 أيام)", cond:s=>Object.values(s.daily).filter(d=>(d.waterMl||0)>=2500).length>=7},
+const STAGE_LABELS=["قريب","متوسط","أسبوعي","بعيد","إدماج نهائي"];
+const STAGE_OFFSETS=[1,3,7,15,30];
+const MAP_COLORS={pending:"#1d3148",active:"#c9a24e",old:"#1f5c49",mastered:"#5fb3ab"};
+const MAP_LABELS={pending:"لم يبدأ",active:"حفظ جارٍ",old:"محفوظ قديم",mastered:"مُدمَج"};
+const MAP_CYCLE=["pending","active","old","mastered"];
+
+const ACHIEVEMENTS=[
+  {id:"first_day",ic:"🌙",t:"أول خطوة",cond:s=>Object.keys(s.daily).some(d=>(s.daily[d].athmaanDone||0)>0)},
+  {id:"streak3",ic:"🔥",t:"3 أيام متتابعة",cond:s=>computeStreak(s)>=3},
+  {id:"streak7",ic:"🔥",t:"أسبوع الثبات",cond:s=>computeStreak(s)>=7},
+  {id:"streak14",ic:"⚡",t:"أسبوعان متواصلان",cond:s=>computeStreak(s)>=14},
+  {id:"day15",ic:"🌗",t:"نصف الطريق",cond:s=>currentDayN(s)>=15},
+  {id:"day30",ic:"🏔️",t:"قمة الثلاثين",cond:s=>currentDayN(s)>=30},
+  {id:"zero_hes",ic:"🎯",t:"صفر تردد في يوم",cond:s=>Object.values(s.daily).some(d=>(d.hesitationCount===0)&&(d.athmaanDone||0)>0)},
+  {id:"review10",ic:"🔁",t:"حارس المراجعة (10)",cond:s=>s.reviews.filter(r=>r.status==="done").length>=10},
+  {id:"review40",ic:"🔁",t:"حارس المراجعة (40)",cond:s=>s.reviews.filter(r=>r.status==="done").length>=40},
+  {id:"thumn_master",ic:"✨",t:"أول إدماج كامل",cond:s=>Object.values(s.quranMap).some(v=>v==="mastered")},
+  {id:"score90",ic:"💯",t:"تقييم ممتاز (90+)",cond:s=>Object.values(s.daily).some(d=>(d.score||0)>=90)},
+  {id:"water7",ic:"💧",t:"منضبط الماء (7 أيام)",cond:s=>Object.values(s.daily).filter(d=>(d.waterMl||0)>=2500).length>=7},
+  {id:"week_perfect",ic:"🏆",t:"أسبوع كامل بدون تفويت",cond:s=>weekPerfect(s)},
 ];
 
-/* ---------------- state ---------------- */
-let state = null;
-let activeTab = "home";
-let clockTimer = null;
-
-const STORAGE_KEYS = {
-  profile:"qx-profile", daily:"qx-daily", map:"qx-quranmap",
-  reviews:"qx-reviews", achievements:"qx-achievements"
-};
-
-function defaultProfile(){
-  return {
-    name:"", startDate: todayISO(), weightKg:55,
-    scheduleOverrides:{}, oldMemoBoundaryJuz:28
-  };
-}
-function defaultQuranMap(){
-  const m = {};
-  for(let j=1;j<=JUZ_COUNT;j++){
-    for(let t=1;t<=THUMN_PER_JUZ;t++){
-      const key = "j"+j+"-t"+t;
-      if(j<=27) m[key]="old";
-      else if(j===28) m[key]="old";
-      else if(j===29) m[key]="pending";
-      else m[key]="active"; // juz 30
-    }
-  }
-  return m;
-}
-
-async function loadKey(key, fallback){
-  try{
-    const res = await window.storage.get(key, false);
-    if(res && res.value) return JSON.parse(res.value);
-    return fallback;
-  }catch(e){ return fallback; }
-}
-async function saveKey(key, value){
-  try{ await window.storage.set(key, JSON.stringify(value), false); }
-  catch(e){ showToast("تعذّر الحفظ — حاول مجدداً"); }
-}
-
-async function initApp(){
-  const [profile, daily, map, reviews, achievements] = await Promise.all([
-    loadKey(STORAGE_KEYS.profile, null),
-    loadKey(STORAGE_KEYS.daily, null),
-    loadKey(STORAGE_KEYS.map, null),
-    loadKey(STORAGE_KEYS.reviews, null),
-    loadKey(STORAGE_KEYS.achievements, null)
-  ]);
-  state = {
-    profile: profile || defaultProfile(),
-    daily: daily || {},
-    quranMap: map || defaultQuranMap(),
-    reviews: reviews || [],
-    achievements: achievements || []
-  };
-  buildNav();
-  switchTab("home");
-  document.getElementById("loading").style.display = "none";
-  document.getElementById("shell").style.display = "flex";
-  document.getElementById("fatigueFab").style.display = "flex";
-  clockTimer = setInterval(()=>{ if(activeTab==="home"||activeTab==="schedule") render(); }, 30000);
-}
-
-/* ---------------- helpers ---------------- */
-function todayISO(){ const d=new Date(); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
-function pad(n){ return n<10?"0"+n:""+n; }
-function addDaysISO(iso, days){ const d=new Date(iso+"T00:00:00"); d.setDate(d.getDate()+days); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
-function daysBetween(a,b){ const da=new Date(a+"T00:00:00"), db=new Date(b+"T00:00:00"); return Math.round((db-da)/86400000); }
-function currentDayNumber(s){ return Math.min(TOTAL_DAYS, Math.max(1, daysBetween(s.profile.startDate, todayISO())+1)); }
-function getDaily(dateISO){ if(!state.daily[dateISO]) state.daily[dateISO] = {athmaanPlanned:0, athmaanDone:0, hesitationCount:0, waterMl:0, sleepHours:0, nap:false, shaykhCorrections:0, score:null, scoreBreakdown:null, notes:"", sessions:[]}; return state.daily[dateISO]; }
-function toMinutes(t){ const p=t.split(":"); return parseInt(p[0])*60+parseInt(p[1]); }
-function fmtMinutes(total){ const h=Math.floor(total/60), m=total%60; return (h>0?h+"س ":"")+(m>0?m+"د":(h>0?"":"0د")); }
-function effectiveTime(i){ return state.profile.scheduleOverrides[i] || SCHEDULE[i].t; }
-function getBlockBounds(i){
-  const start = toMinutes(effectiveTime(i));
-  const end = i<SCHEDULE.length-1 ? toMinutes(effectiveTime(i+1)) : toMinutes(effectiveTime(0))+1440;
-  return {start,end};
-}
-function getCurrentBlockIndex(){
-  const now = new Date(); const nowMin = now.getHours()*60+now.getMinutes();
-  for(let i=0;i<SCHEDULE.length;i++){
-    const {start,end} = getBlockBounds(i);
-    if(i===SCHEDULE.length-1){
-      if(nowMin>=start || nowMin < (end-1440)) return i;
-    } else if(nowMin>=start && nowMin<end) return i;
-  }
-  return 0;
-}
-function computeStreak(s){
-  let streak=0; let cursor = todayISO();
-  const t = getDaily(todayISO());
-  if(!((t.athmaanDone||0)>0)){ cursor = addDaysISO(cursor,-1); }
-  for(let i=0;i<400;i++){
-    const rec = s.daily[cursor];
-    if(rec && (rec.athmaanDone||0)>0){ streak++; cursor = addDaysISO(cursor,-1); }
-    else break;
-  }
-  return streak;
-}
-function weekZeroHesitation(s){
-  let cursor = todayISO(); let count=0;
-  for(let i=0;i<7;i++){
-    const rec = s.daily[cursor];
-    if(rec && (rec.athmaanDone||0)>0 && (rec.hesitationCount||0)===0) count++;
-    cursor = addDaysISO(cursor,-1);
-  }
-  return count>=7;
-}
-function countStatus(s, juzPrefix, minCount){
-  let c=0; for(const k in s.quranMap){ if(k.startsWith(juzPrefix+"-") && (s.quranMap[k]==="mastered"||s.quranMap[k]==="old")) c++; }
-  return c>=minCount;
-}
-function mapStats(){
-  const vals = Object.values(state.quranMap);
-  const total = vals.length;
-  const mastered = vals.filter(v=>v==="mastered").length;
-  const old = vals.filter(v=>v==="old").length;
-  const active = vals.filter(v=>v==="active").length;
-  const pending = vals.filter(v=>v==="pending").length;
-  return {total, mastered, old, active, pending, securedPct: Math.round(((mastered+old)/total)*100)};
-}
-function showToast(msg){
-  const el = document.getElementById("toast");
-  el.textContent = msg; el.classList.add("show");
-  clearTimeout(window._toastT);
-  window._toastT = setTimeout(()=>el.classList.remove("show"), 2200);
-}
-function todayWaterTarget(){ return 2700; }
-
-/* ---------------- icons ---------------- */
-const ICONS = {
+const STORAGE_KEYS={profile:"qx-profile",daily:"qx-daily",map:"qx-quranmap",reviews:"qx-reviews",achievements:"qx-achievements"};
+const NAV_ITEMS=[
+  {id:"home",label:"الرئيسية",icon:"home"},
+  {id:"schedule",label:"الجدول",icon:"schedule"},
+  {id:"coach",label:"الحفظ",icon:"coach"},
+  {id:"review",label:"المراجعة",icon:"review"},
+  {id:"map",label:"الخريطة",icon:"map"},
+  {id:"project",label:"المشروع",icon:"project"},
+  {id:"health",label:"الصحة",icon:"health"},
+  {id:"awards",label:"الإنجازات",icon:"awards"},
+  {id:"settings",label:"الإعدادات",icon:"settings"},
+  {id:"about",label:"حول",icon:"about"}
+];
+const ICONS={
   home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>',
-  schedule:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
+  schedule:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
   coach:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C5.5 4.5 8 4 12 5.5C16 4 18.5 4.5 20 5.5V18C18.5 17 16 16.5 12 18C8 16.5 5.5 17 4 18V5.5Z"/><path d="M12 5.5V18"/></svg>',
   review:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 4v4h-4"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 20v-4h4"/></svg>',
   map:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.3"/><rect x="14" y="3" width="7" height="7" rx="1.3"/><rect x="3" y="14" width="7" height="7" rx="1.3"/><rect x="14" y="14" width="7" height="7" rx="1.3"/></svg>',
   project:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4"/><path d="M6 5h12l-3 4 3 4H6"/></svg>',
-  health:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C8 9 6 11.5 6 15a6 6 0 0 0 12 0c0-3.5-2-6-6-12Z"/></svg>',
+  health:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3C8 9 6 11.5 6 15a6 6 0 0 0 12 0c0-3.5-2-6-6-12Z"/></svg>',
   awards:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5.2"/><path d="M9 13.5 7.5 21 12 18.5 16.5 21 15 13.5"/></svg>',
-  settings:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V19.6a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H4.4a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.55-1.1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H10.5a1.7 1.7 0 0 0 1-1.55V4.4a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V10.5a1.7 1.7 0 0 0 1.55 1H19.6a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.55 1Z"/></svg>',
-  fatigue:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3 C8 9 6 11 6 15 a6 6 0 0 0 12 0 C18 11 16 9 12 3 Z"/></svg>',
-  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 7"/></svg>',
-  warn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><circle cx="12" cy="16.3" r="0.6" fill="currentColor"/><path d="M10.6 4 2.8 18a1.6 1.6 0 0 0 1.4 2.4h15.6a1.6 1.6 0 0 0 1.4-2.4L13.4 4a1.6 1.6 0 0 0-2.8 0Z"/></svg>'
+  settings:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>',
+  about:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v1"/><path d="M12 12v4"/></svg>'
 };
 
-const NAV_ITEMS = [
-  {id:"home", label:"الرئيسية", icon:"home"},
-  {id:"schedule", label:"الجدول", icon:"schedule"},
-  {id:"coach", label:"الحفظ", icon:"coach"},
-  {id:"review", label:"المراجعة", icon:"review"},
-  {id:"map", label:"الخريطة", icon:"map"},
-  {id:"project", label:"المشروع", icon:"project"},
-  {id:"health", label:"الصحة", icon:"health"},
-  {id:"awards", label:"الإنجازات", icon:"awards"},
-  {id:"settings", label:"الإعدادات", icon:"settings"}
-];
+/* ============ STORAGE (localStorage — works in all browsers + Android WebView) ============ */
+async function loadKey(key,fallback){
+  try{const v=localStorage.getItem(key);return v?JSON.parse(v):fallback;}
+  catch(e){return fallback;}
+}
+async function saveKey(key,value){
+  try{localStorage.setItem(key,JSON.stringify(value));}
+  catch(e){showToast("تعذّر الحفظ — تحقق من مساحة التخزين");}
+}
 
+/* ============ STATE ============ */
+let state=null, activeTab="home", clockTimer=null;
+
+function defaultProfile(){return{name:"",startDate:todayISO(),weightKg:55,scheduleOverrides:{},oldMemoBoundaryJuz:28};}
+function defaultQuranMap(){
+  const m={};
+  for(let j=1;j<=30;j++) for(let t=1;t<=8;t++){
+    const k="j"+j+"-t"+t;
+    m[k]=j<=28?"old":j===29?"pending":"active";
+  }
+  return m;
+}
+
+async function initApp(){
+  const [profile,daily,map,reviews,achievements]=await Promise.all([
+    loadKey(STORAGE_KEYS.profile,null),loadKey(STORAGE_KEYS.daily,null),
+    loadKey(STORAGE_KEYS.map,null),loadKey(STORAGE_KEYS.reviews,null),
+    loadKey(STORAGE_KEYS.achievements,null)
+  ]);
+  state={
+    profile:profile||defaultProfile(),daily:daily||{},
+    quranMap:map||defaultQuranMap(),reviews:reviews||[],achievements:achievements||[]
+  };
+  buildNav();
+  switchTab("home");
+  document.getElementById("loading").style.display="none";
+  document.getElementById("shell").style.display="flex";
+  document.getElementById("fatigueFab").style.display="flex";
+  updateClock();
+  clockTimer=setInterval(()=>{updateClock();if(activeTab==="home"||activeTab==="schedule")renderTop();},30000);
+  if(typeof navigator.serviceWorker!=="undefined")
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+}
+
+/* ============ HELPERS ============ */
+function todayISO(){const d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
+function pad(n){return n<10?"0"+n:""+n;}
+function addDaysISO(iso,days){const d=new Date(iso+"T00:00:00");d.setDate(d.getDate()+days);return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
+function daysBetween(a,b){return Math.round((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/86400000);}
+function currentDayN(s){return Math.min(TOTAL_DAYS,Math.max(1,daysBetween(s.profile.startDate,todayISO())+1));}
+function getDaily(iso){if(!state.daily[iso])state.daily[iso]={athmaanPlanned:0,athmaanDone:0,hesitationCount:0,waterMl:0,sleepHours:0,nap:false,shaykhCorrections:0,score:null,scoreBreakdown:null,notes:"",sessions:[],scheduleChecks:{},foodChecks:{}};return state.daily[iso];}
+function toMin(t){const p=t.split(":");return parseInt(p[0])*60+parseInt(p[1]);}
+function fmtMin(m){const h=Math.floor(m/60),mm=m%60;return(h>0?h+"س ":"")+(mm>0?mm+"د":(h>0?"":"0د"));}
+function effectiveTime(i){return state.profile.scheduleOverrides[i]||SCHEDULE[i].t;}
+function getBlockBounds(i){const s=toMin(effectiveTime(i)),e=i<SCHEDULE.length-1?toMin(effectiveTime(i+1)):toMin(effectiveTime(0))+1440;return{start:s,end:e};}
+function getCurrentBlockIndex(){const now=new Date(),nm=now.getHours()*60+now.getMinutes();for(let i=0;i<SCHEDULE.length;i++){const{start,end}=getBlockBounds(i);if(i===SCHEDULE.length-1){if(nm>=start||nm<(end-1440))return i;}else if(nm>=start&&nm<end)return i;}return 0;}
+function computeStreak(s){let streak=0,cursor=todayISO();const t=getDaily(todayISO());if(!((t.athmaanDone||0)>0))cursor=addDaysISO(cursor,-1);for(let i=0;i<400;i++){const r=s.daily[cursor];if(r&&(r.athmaanDone||0)>0){streak++;cursor=addDaysISO(cursor,-1);}else break;}return streak;}
+function weekPerfect(s){let c=0,cursor=todayISO();for(let i=0;i<7;i++){const r=s.daily[cursor];if(r&&(r.athmaanDone||0)>0)c++;cursor=addDaysISO(cursor,-1);}return c>=7;}
+function mapStats(){const v=Object.values(state.quranMap);return{total:v.length,mastered:v.filter(x=>x==="mastered").length,old:v.filter(x=>x==="old").length,active:v.filter(x=>x==="active").length,securedPct:Math.round(((v.filter(x=>x==="mastered").length+v.filter(x=>x==="old").length)/v.length)*100)};}
+function recommendedAthmaan(dayN){return dayN<=7?2:dayN<=14?3:4;}
+function getDailyVerse(){const d=parseInt(todayISO().replace(/-/g,""))%DAILY_VERSES.length;return DAILY_VERSES[d];}
+
+function showToast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");clearTimeout(window._tt);window._tt=setTimeout(()=>el.classList.remove("show"),2400);}
+function updateClock(){const n=new Date();document.getElementById("liveClock").textContent=pad(n.getHours())+":"+pad(n.getMinutes());}
+
+/* ============ NAV ============ */
 function buildNav(){
-  const nav = document.getElementById("navrow");
-  nav.innerHTML = NAV_ITEMS.map(it=>
-    `<div class="navpill" id="pill-${it.id}" onclick="switchTab('${it.id}')">${ICONS[it.icon]}<span>${it.label}</span></div>`
-  ).join("");
+  document.getElementById("navrow").innerHTML=NAV_ITEMS.map(it=>`<div class="navpill" id="pill-${it.id}" onclick="switchTab('${it.id}')">${ICONS[it.icon]}<span>${it.label}</span></div>`).join("");
 }
 function switchTab(id){
-  activeTab = id;
-  NAV_ITEMS.forEach(it=>{
-    const p = document.getElementById("pill-"+it.id);
-    if(p) p.classList.toggle("active", it.id===id);
-  });
+  activeTab=id;
+  NAV_ITEMS.forEach(it=>{const p=document.getElementById("pill-"+it.id);if(p)p.classList.toggle("active",it.id===id);});
   render();
 }
 
-/* ---------------- top stats ---------------- */
+/* ============ RENDER MASTER ============ */
 function renderTop(){
-  document.getElementById("topDay").textContent = currentDayNumber(state)+"/"+TOTAL_DAYS;
-  document.getElementById("topStreak").textContent = computeStreak(state)+"🔥";
+  document.getElementById("topDay").textContent=currentDayN(state)+"/"+TOTAL_DAYS;
+  document.getElementById("topStreak").textContent=computeStreak(state)+"🔥";
 }
-
-/* ---------------- master render ---------------- */
 function render(){
   renderTop();
-  const c = document.getElementById("content");
-  let html = "";
-  if(activeTab==="home") html = renderHome();
-  else if(activeTab==="schedule") html = renderSchedule();
-  else if(activeTab==="coach") html = renderCoach();
-  else if(activeTab==="review") html = renderReview();
-  else if(activeTab==="map") html = renderMap();
-  else if(activeTab==="project") html = renderProject();
-  else if(activeTab==="health") html = renderHealth();
-  else if(activeTab==="awards") html = renderAwards();
-  else if(activeTab==="settings") html = renderSettings();
-  c.innerHTML = `<div class="fade-in">${html}</div>`;
+  const fns={home:renderHome,schedule:renderSchedule,coach:renderCoach,review:renderReview,map:renderMap,project:renderProject,health:renderHealth,awards:renderAwards,settings:renderSettings,about:renderAbout};
+  const c=document.getElementById("content");
+  c.innerHTML=`<div class="fade-in">${(fns[activeTab]||renderHome)()}</div>`;
 }
 
-/* ============================================================
-   HOME
-   ============================================================ */
-function rosetteSVG(pct, dayLabel){
-  const C = 2*Math.PI*72;
-  const off = C - (Math.min(100,Math.max(0,pct))/100)*C;
-  return `
-  <svg class="rosette" width="220" height="220" viewBox="0 0 200 200">
-    <g transform="translate(100,100)">
-      <rect x="-78" y="-78" width="156" height="156" rx="14" fill="none" stroke="#c9a24e" stroke-opacity="0.28" stroke-width="1.3"/>
-      <rect x="-78" y="-78" width="156" height="156" rx="14" fill="none" stroke="#c9a24e" stroke-opacity="0.28" stroke-width="1.3" transform="rotate(45)"/>
-      <circle r="88" fill="none" stroke="#9aa8b8" stroke-opacity="0.22" stroke-width="1"/>
-      ${Array.from({length:24}).map((_,i)=>{
-        const a = (i*15)*Math.PI/180;
-        const x1=82*Math.cos(a), y1=82*Math.sin(a), x2=87*Math.cos(a), y2=87*Math.sin(a);
-        return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#c9a24e" stroke-opacity="0.35" stroke-width="1.2"/>`;
-      }).join("")}
-      <circle r="72" fill="none" stroke="#16283c" stroke-width="9"/>
-      <circle r="72" fill="none" stroke="#c9a24e" stroke-width="9" stroke-linecap="round"
-        stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90)"/>
-      <circle r="58" fill="#101e30" stroke="#1d3148" stroke-width="1"/>
-      <text x="0" y="-3" text-anchor="middle" fill="#e4c77b" font-size="30" font-weight="600">${Math.round(pct)}%</text>
-      <text x="0" y="16" text-anchor="middle" fill="#9aa8b8" font-size="10">${dayLabel}</text>
-    </g>
-  </svg>`;
+/* ============ HOME ============ */
+function rosetteSVG(pct,label){
+  const C=2*Math.PI*72,off=C-(Math.min(100,Math.max(0,pct))/100)*C;
+  return `<svg width="200" height="200" viewBox="0 0 200 200"><g transform="translate(100,100)"><rect x="-78" y="-78" width="156" height="156" rx="14" fill="none" stroke="#c9a24e" stroke-opacity=".25" stroke-width="1.2"/><rect x="-78" y="-78" width="156" height="156" rx="14" fill="none" stroke="#c9a24e" stroke-opacity=".25" stroke-width="1.2" transform="rotate(45)"/>${Array.from({length:24}).map((_,i)=>{const a=(i*15)*Math.PI/180,x1=82*Math.cos(a),y1=82*Math.sin(a),x2=87*Math.cos(a),y2=87*Math.sin(a);return`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#c9a24e" stroke-opacity=".3" stroke-width="1.1"/>`;}).join("")}<circle r="72" fill="none" stroke="#16283c" stroke-width="9"/><circle r="72" fill="none" stroke="#c9a24e" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90)"/><circle r="57" fill="#101e30" stroke="#1d3148" stroke-width="1"/><text x="0" y="-2" text-anchor="middle" fill="#e4c77b" font-size="28" font-family="'IBM Plex Mono'" font-weight="600">${Math.round(pct)}%</text><text x="0" y="15" text-anchor="middle" fill="#9aa8b8" font-size="9.5" font-family="'IBM Plex Sans Arabic'">${label}</text></g></svg>`;
 }
-
+function weekDotsHTML(){
+  const today=todayISO();
+  let h='<div class="week-dots">';
+  for(let i=6;i>=0;i--){
+    const d=addDaysISO(today,-i),rec=state.daily[d];
+    const score=rec?.score!=null?rec.score:(rec&&(rec.athmaanDone||0)>0?50:-1);
+    const bg=score>=90?"#5fb3ab":score>=70?"#c9a24e":score>=50?"#c1622d":score>=0?"#3a4a60":"#1d3148";
+    const cls=i===0?"week-dot today-dot":"week-dot";
+    h+=`<div class="${cls}" style="background:${bg};" title="${d}"></div>`;
+  }
+  return h+"</div>";
+}
 function renderHome(){
-  const today = todayISO();
-  const rec = getDaily(today);
-  const dayN = currentDayNumber(state);
-  const idx = getCurrentBlockIndex();
-  const block = SCHEDULE[idx];
-  const meta = TYPE_META[block.type];
-  const {start,end} = getBlockBounds(idx);
-  const now = new Date(); const nowMin = now.getHours()*60+now.getMinutes() + (now.getMinutes()!==now.getMinutes()?0:0);
-  const remaining = (idx===SCHEDULE.length-1 && nowMin<start) ? (end-1440-nowMin) : (end-nowMin);
-  const dueReviews = state.reviews.filter(r=>r.status==="pending" && r.dueDate<=today);
-  const targetAth = rec.athmaanPlanned || recommendedAthmaan(dayN);
-
-  let pct = 0;
-  if(rec.score!=null) pct = rec.score;
-  else if(targetAth>0) pct = Math.round(((rec.athmaanDone||0)/targetAth)*60 + ((rec.sessions||[]).length>0?10:0));
-  pct = Math.min(100,pct);
-
+  const today=todayISO(),rec=getDaily(today),dayN=currentDayN(state);
+  const idx=getCurrentBlockIndex(),block=SCHEDULE[idx],meta=TYPE_META[block.type];
+  const now=new Date(),nm=now.getHours()*60+now.getMinutes();
+  const {end}=getBlockBounds(idx);
+  const rem=idx===SCHEDULE.length-1&&nm<toMin(effectiveTime(idx))?end-1440-nm:end-nm;
+  const dueRev=state.reviews.filter(r=>r.status==="pending"&&r.dueDate<=today);
+  const targetAth=rec.athmaanPlanned||recommendedAthmaan(dayN);
+  const pct=rec.score!=null?rec.score:Math.min(99,Math.max(0,((rec.athmaanDone||0)/Math.max(1,targetAth))*65+((rec.sessions||[]).length>0?10:0)));
+  const verse=getDailyVerse();
   return `
-  <div class="rosette-wrap">${rosetteSVG(pct, "يوم "+dayN+" / "+TOTAL_DAYS)}</div>
-
+  <div class="verse-card"><div class="verse-text">${verse.text}</div><div class="verse-ref">${verse.ref}</div></div>
+  <div class="rosette-wrap">${rosetteSVG(pct,"يوم "+dayN+" / "+TOTAL_DAYS)}</div>
+  ${weekDotsHTML()}
   <div class="card" style="border-color:${meta.color}55;">
-    <div class="card-title">
-      <span>النشاط الآن</span>
-      <span class="tag now">${block.t}</span>
-    </div>
-    <div style="font-size:15px; font-weight:600; margin-bottom:3px;">${block.label}</div>
-    ${block.note?`<div style="font-size:11.5px; color:var(--parchment-dim); margin-bottom:10px;">${block.note}</div>`:""}
-    <div style="font-size:10.5px; color:var(--parchment-dim); margin-bottom:10px; font-family:var(--font-mono);">يتبقّى تقريباً ${fmtMinutes(Math.max(0,remaining))}</div>
-    ${block.type==="memorize" ? `<button class="btn btn-gold" onclick="switchTab('coach')">ابدأ جلسة الحفظ ←</button>` :
-      (block.type.indexOf("review")===0 ? `<button class="btn btn-gold" onclick="switchTab('review')">افتح المراجعة ←</button>` :
-      (block.type==="project" ? `<button class="btn btn-gold" onclick="switchTab('project')">سجّل المشروع ←</button>` : `<button class="btn btn-ghost" onclick="switchTab('schedule')">عرض الجدول كاملاً</button>`))}
+    <div class="card-title"><span>النشاط الآن</span><span class="tag now">${block.t}</span></div>
+    <div style="font-size:14.5px;font-weight:600;margin-bottom:2px;">${block.label}</div>
+    ${block.note?`<div style="font-size:11px;color:var(--parchment-dim);margin-bottom:8px;">${block.note}</div>`:""}
+    <div style="font-size:10px;color:var(--parchment-dim);margin-bottom:8px;font-family:var(--font-mono);">يتبقّى ≈ ${fmtMin(Math.max(0,rem))}</div>
+    ${block.type==="memorize"?`<button class="btn btn-gold" onclick="switchTab('coach')">ابدأ جلسة الحفظ ←</button>`:block.type.indexOf("review")===0?`<button class="btn btn-gold" onclick="switchTab('review')">افتح المراجعة ←</button>`:block.type==="project"?`<button class="btn btn-gold" onclick="switchTab('project')">سجّل المشروع ←</button>`:`<button class="btn btn-ghost" onclick="switchTab('schedule')">عرض الجدول كاملاً</button>`}
   </div>
-
   <div class="chiprow">
     <div class="chip"><div class="v">${rec.athmaanDone||0}/${targetAth}</div><div class="l">أثمان اليوم</div></div>
-    <div class="chip"><div class="v">${dueReviews.length}</div><div class="l">مراجعات مستحقة</div></div>
-    <div class="chip"><div class="v">${((rec.waterMl||0)/1000).toFixed(1)}ل</div><div class="l">ماء اليوم</div></div>
+    <div class="chip"><div class="v">${dueRev.length}</div><div class="l">مراجعات مستحقة</div></div>
+    <div class="chip"><div class="v">${((rec.waterMl||0)/1000).toFixed(1)}ل</div><div class="l">ماء</div></div>
+    <div class="chip"><div class="v">${computeStreak(state)}</div><div class="l">تتابع</div></div>
   </div>
-
-  ${dueReviews.length>0?`
-  <div class="card">
-    <div class="card-title"><span>مراجعات مستحقة الآن</span><span class="tag">${dueReviews.length}</span></div>
-    ${dueReviews.slice(0,3).map(r=>`
-      <div class="list-item">
-        <div class="dot" style="background:${r.dueDate<today?'#c1622d':'#5fb3ab'};"></div>
-        <div class="li-label">${r.thumnLabel}<span class="note">مرحلة: ${r.stage}${r.dueDate<today?' — متأخرة':''}</span></div>
-      </div>`).join("")}
-    <button class="btn btn-ghost" style="margin-top:8px;" onclick="switchTab('review')">فتح كل المراجعات</button>
-  </div>`:""}
-
-  <div class="card">
-    <div class="card-title"><span>تقييم اليوم (100 نقطة)</span>${rec.score!=null?`<span class="tag done">${rec.score}</span>`:""}</div>
-    <p style="font-size:11.5px; color:var(--parchment-dim); margin:0 0 10px;">صفّ يومك بصدق على المعايير الخمسة — يغذّي خط البيانات في الإنجازات.</p>
-    <button class="btn btn-ghost" onclick="openEvalModal()">${rec.score!=null?"تعديل التقييم":"سجّل تقييم اليوم"}</button>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span>اختبار الانطلاق العشوائي</span></div>
-    <p style="font-size:11.5px; color:var(--parchment-dim); margin:0 0 10px;">علاج مباشر لنقطة الاعتماد على النظر — ابدأ من نقطة عشوائية لا من أول السورة.</p>
-    <button class="btn btn-emerald" onclick="openRandomTest()">ابدأ اختباراً عشوائياً</button>
+  ${dueRev.length>0?`<div class="card"><div class="card-title"><span>مراجعات مستحقة</span><span class="tag">${dueRev.length}</span></div>${dueRev.slice(0,3).map(r=>`<div class="list-item"><div class="dot" style="background:${r.dueDate<today?"#c1622d":"#5fb3ab"};"></div><div class="li-label">${r.thumnLabel}<span class="note">مرحلة: ${r.stage}${r.dueDate<today?" — متأخرة":""}</span></div></div>`).join("")}<button class="btn btn-ghost" style="margin-top:8px;" onclick="switchTab('review')">فتح كل المراجعات</button></div>`:""}
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="openEvalModal()">${rec.score!=null?"تعديل التقييم ("+rec.score+")":"سجّل تقييم اليوم"}</button>
+    <button class="btn btn-emerald" onclick="openRandomTest()">اختبار عشوائي</button>
   </div>
   `;
 }
 
-function recommendedAthmaan(dayN){
-  if(dayN<=7) return 2;
-  if(dayN<=14) return 3;
-  return 4;
-}
-
-/* ============================================================
-   SCHEDULE
-   ============================================================ */
+/* ============ SCHEDULE ============ */
 function renderSchedule(){
-  const idx = getCurrentBlockIndex();
-  const today = todayISO();
-  const rec = getDaily(today);
-  rec.scheduleChecks = rec.scheduleChecks || {};
-  let html = `<h2 class="sectitle">جدول اليوم</h2>
-  <p class="secsub">مبني على مواقيت طرابلس التقريبية لأواخر يونيو. اضغط على الوقت لتعديله يدوياً إن تغيّرت مواقيت الصلاة.</p>`;
-
-  html += SCHEDULE.map((b,i)=>{
-    const meta = TYPE_META[b.type];
-    const isNow = i===idx;
-    const isPast = i<idx;
-    const checked = !!rec.scheduleChecks[i];
-    return `
-    <div class="timeline-item">
-      <div class="tl-time" onclick="editScheduleTime(${i})" id="tlt-${i}">${effectiveTime(i)}</div>
-      <div class="tl-rail">
-        <div class="tl-dot ${isNow?'now':(isPast?'past':'')}"></div>
-        <div class="tl-line"></div>
-      </div>
-      <div class="tl-body">
-        <div style="display:flex; align-items:center; justify-content:space-between;">
-          <div class="tl-label" style="color:${isNow?'var(--gold-soft)':'var(--parchment)'}; font-weight:${isNow?'600':'400'};">${b.label}</div>
-          <input type="checkbox" ${checked?'checked':''} onchange="toggleScheduleCheck(${i})" style="accent-color:#c9a24e; width:16px; height:16px;">
-        </div>
-        ${b.note?`<div class="tl-note">${b.note}</div>`:""}
-      </div>
-    </div>`;
+  const idx=getCurrentBlockIndex(),today=todayISO(),rec=getDaily(today);
+  let h=`<h2 class="sectitle">جدول اليوم</h2><p class="secsub">اضغط على الوقت لتعديله يدوياً إن تغيّرت مواقيت الصلاة.</p>`;
+  h+=SCHEDULE.map((b,i)=>{
+    const meta=TYPE_META[b.type],isNow=i===idx,isPast=i<idx,checked=!!(rec.scheduleChecks||{})[i];
+    return `<div class="timeline-item"><div class="tl-time" onclick="editScheduleTime(${i})" id="tlt-${i}">${effectiveTime(i)}</div><div class="tl-rail"><div class="tl-dot ${isNow?"now":isPast?"past":""}"></div><div class="tl-line"></div></div><div class="tl-body"><div style="display:flex;align-items:center;justify-content:space-between;"><div class="tl-label" style="color:${isNow?"var(--gold-soft)":"var(--parchment)"};font-weight:${isNow?"600":"400"};">${b.label}</div><input type="checkbox" ${checked?"checked":""} onchange="toggleScheduleCheck(${i})" style="accent-color:#c9a24e;width:15px;height:15px;"></div>${b.note?`<div class="tl-note">${b.note}</div>`:""}</div></div>`;
   }).join("");
-  return html;
+  return h;
 }
-function editScheduleTime(i){
-  const el = document.getElementById("tlt-"+i);
-  const cur = effectiveTime(i);
-  el.innerHTML = `<input type="time" value="${cur}" onblur="saveScheduleTime(${i}, this.value)" onkeydown="if(event.key==='Enter') this.blur();">`;
-  el.querySelector("input").focus();
-}
-function saveScheduleTime(i, val){
-  if(val) state.profile.scheduleOverrides[i] = val;
-  saveKey(STORAGE_KEYS.profile, state.profile);
-  render();
-}
-function toggleScheduleCheck(i){
-  const rec = getDaily(todayISO());
-  rec.scheduleChecks[i] = !rec.scheduleChecks[i];
-  saveKey(STORAGE_KEYS.daily, state.daily);
-}
+function editScheduleTime(i){const el=document.getElementById("tlt-"+i);const cur=effectiveTime(i);el.innerHTML=`<input type="time" value="${cur}" onblur="saveScheduleTime(${i},this.value)" onkeydown="if(event.key==='Enter')this.blur();">`;el.querySelector("input").focus();}
+function saveScheduleTime(i,val){if(val)state.profile.scheduleOverrides[i]=val;saveKey(STORAGE_KEYS.profile,state.profile);render();}
+function toggleScheduleCheck(i){const rec=getDaily(todayISO());rec.scheduleChecks=rec.scheduleChecks||{};rec.scheduleChecks[i]=!rec.scheduleChecks[i];saveKey(STORAGE_KEYS.daily,state.daily);}
 
-/* ============================================================
-   MEMORIZATION COACH
-   ============================================================ */
-let coachState = null;
-function freshCoachState(){
-  return {stage:0, reads:0, segIndex:1, segStreak:0, fullStreak:0, hesitations:0, randomPassed:false, juz:30, thumn:1};
-}
+/* ============ COACH ============ */
+let coachState=null;
+function freshCoach(){return{stage:0,reads:0,segIndex:1,segStreak:0,fullStreak:0,hesitations:0,juz:30,thumn:1};}
 function renderCoach(){
-  if(!coachState) coachState = freshCoachState();
-  const cs = coachState;
-  const stages = ["قراءة استكشافية","تقسيم وحفظ تراكمي","تسميع الصفحة كاملة","الربط الزمني","اختبار الانطلاق العشوائي","تم ✓"];
-  let body = "";
-
-  if(cs.stage===0){
-    body = `
-    <p class="secsub">اقرأ المقطع المستهدف 3 مرات بالنظر، بتجويد سليم، بلا أي محاولة حفظ بعد — فقط استيعاب المعنى وموضع الآيات.</p>
-    <div class="counter-circle"><div class="n">${cs.reads}/3</div><div class="lab">قراءات</div></div>
-    <button class="btn btn-gold" onclick="coachRead()">سجّلت قراءة ✓</button>`;
-  } else if(cs.stage===1){
-    body = `
-    <p class="secsub">المقطع رقم ${cs.segIndex}. كرره (نظراً ثم غيباً) حتى تقوله 3 مرات متتالية دون أي نظر للمصحف.</p>
-    <div class="counter-circle"><div class="n">${cs.segStreak}/3</div><div class="lab">تكرار بثقة</div></div>
-    <div class="btn-row">
-      <button class="btn btn-gold" onclick="coachSegConfident()">بثقة ✓</button>
-      <button class="btn btn-ember" onclick="coachSegHesitant()">تردد ⚠</button>
-    </div>
-    <button class="btn btn-ghost" style="margin-top:10px;" onclick="coachFinishSegments()">أنهيت كل المقاطع — تابع للتسميع الكامل</button>`;
-  } else if(cs.stage===2){
-    body = `
-    <p class="secsub">سمّع الصفحة كاملة من الذاكرة. تحتاج 3 مرات متتالية بلا أي خطأ أو تردد لاعتبارها محفوظة مبدئياً.</p>
-    <div class="counter-circle"><div class="n">${cs.fullStreak}/3</div><div class="lab">تسميع كامل بثقة</div></div>
-    <div class="btn-row">
-      <button class="btn btn-gold" onclick="coachFullConfident()">بثقة ✓</button>
-      <button class="btn btn-ember" onclick="coachFullHesitant()">تردد ⚠</button>
-    </div>`;
-  } else if(cs.stage===3){
-    body = `
-    <p class="secsub">اربط آخر صفحة سابقة بأول هذه الصفحة — هذا الموضع تحديداً أكثر نقاط النسيان شيوعاً عند الحفاظ.</p>
-    <button class="btn btn-gold" onclick="coachAdvance()">تم الربط ✓</button>`;
-  } else if(cs.stage===4){
-    const j = cs.juz, t = cs.thumn;
-    body = `
-    <p class="secsub">اختبار إلزامي لعلاج الاعتماد على النظر: ابدأ التسميع الآن من <b style="color:var(--gold-soft);">منتصف</b> ما حفظته اليوم، لا من أوله، واستمر بثقة.</p>
-    <div class="card" style="text-align:center;">نقطة الانطلاق المقترحة: <b>الجزء ${j} — الثمن ${t}</b>، من منتصف المقطع</div>
-    <div class="btn-row">
-      <button class="btn btn-gold" onclick="coachRandomPass()">اجتزته بثقة ✓</button>
-      <button class="btn btn-ember" onclick="coachRandomFail()">تعثرت — أعد المحاولة ⚠</button>
-    </div>`;
-  } else {
-    body = `
-    <div class="card" style="text-align:center; border-color:var(--gold-dim);">
-      <div style="font-size:34px; margin-bottom:6px;">✦</div>
-      <div style="font-weight:600; margin-bottom:4px;">أُحسنت — الصفحة محفوظة مبدئياً</div>
-      <div style="font-size:11.5px; color:var(--parchment-dim);">عدد حالات التردد في هذه الجلسة: ${cs.hesitations}</div>
-    </div>
-    <p class="secsub">سيُضاف هذا المحفوظ تلقائياً لجدول التكرار المتباعد (غداً، +3، +7، +15، +30 يوماً). التثبيت الحقيقي يأتي من المرور بهذا الجدول كاملاً، لا من اليوم وحده.</p>
-    <button class="btn btn-gold" onclick="coachComplete()">حفظ الجلسة وإغلاقها</button>`;
-  }
-
-  return `<h2 class="sectitle">رفيق الحفظ</h2>
-  <div class="stage-dots">${stages.slice(0,5).map((s,i)=>`<div class="stage-dot ${i===cs.stage?'on':(i<cs.stage?'past':'')}"></div>`).join("")}</div>
-  <div class="card-title" style="justify-content:center; margin-bottom:14px; color:var(--parchment-dim); font-weight:400;">${stages[cs.stage]}</div>
-  ${cs.stage<5?`
-  <div class="card">
-    <div class="field-label">موقع الصفحة (للربط بالخريطة)</div>
-    <div class="sel-row">
-      <select class="input-text" style="width:auto; flex:1;" onchange="coachSetJuz(this.value)">
-        ${Array.from({length:30}).map((_,i)=>`<option value="${30-i}" ${cs.juz===30-i?'selected':''}>الجزء ${30-i}</option>`).join("")}
-      </select>
-      <select class="input-text" style="width:auto; flex:1;" onchange="coachSetThumn(this.value)">
-        ${Array.from({length:8}).map((_,i)=>`<option value="${i+1}" ${cs.thumn===i+1?'selected':''}>الثمن ${i+1}</option>`).join("")}
-      </select>
-    </div>
-  </div>`:""}
-  ${body}
-  ${cs.stage<5?`<button class="btn btn-ghost" style="margin-top:14px;" onclick="resetCoach()">إعادة الجلسة من البداية</button>`:""}
-  `;
+  if(!coachState)coachState=freshCoach();
+  const cs=coachState;
+  const stages=["قراءة استكشافية","تقسيم وحفظ تراكمي","تسميع الصفحة كاملة","الربط الزمني","اختبار الانطلاق العشوائي","تم ✓"];
+  let body="";
+  if(cs.stage===0)body=`<p class="secsub">اقرأ المقطع 3 مرات بالنظر بتجويد سليم، بلا أي محاولة حفظ — استيعاب المعنى وموضع الآيات فقط.</p><div class="counter-circle"><div class="n">${cs.reads}/3</div><div class="lab">قراءات</div></div><button class="btn btn-gold" onclick="coachRead()">سجّلت قراءة ✓</button>`;
+  else if(cs.stage===1)body=`<p class="secsub">المقطع ${cs.segIndex} — كرره (نظراً ثم غيباً) حتى تقوله 3 مرات بلا أي نظر.</p><div class="counter-circle"><div class="n">${cs.segStreak}/3</div><div class="lab">تكرار بثقة</div></div><div class="btn-row"><button class="btn btn-gold" onclick="coachSegOK()">بثقة ✓</button><button class="btn btn-ember" onclick="coachSegHes()">تردد ⚠</button></div><button class="btn btn-ghost" style="margin-top:9px;" onclick="coachState.stage=2;render()">أنهيت كل المقاطع — تسميع كامل</button>`;
+  else if(cs.stage===2)body=`<p class="secsub">سمّع الصفحة كاملة من الذاكرة — 3 مرات متتالية بلا خطأ أو تردد لاعتبارها محفوظة مبدئياً.</p><div class="counter-circle"><div class="n">${cs.fullStreak}/3</div><div class="lab">تسميع كامل</div></div><div class="btn-row"><button class="btn btn-gold" onclick="coachFullOK()">بثقة ✓</button><button class="btn btn-ember" onclick="coachFullHes()">تردد ⚠</button></div>`;
+  else if(cs.stage===3)body=`<p class="secsub">اربط آخر الصفحة السابقة بأول هذه الصفحة — هذا الموضع أكثر نقاط النسيان شيوعاً.</p><button class="btn btn-gold" onclick="coachState.stage=4;render()">تم الربط ✓</button>`;
+  else if(cs.stage===4)body=`<p class="secsub">ابدأ التسميع الآن من <b style="color:var(--gold-soft);">منتصف</b> الصفحة لا من أولها — هذا جوهر علاج الاعتماد على النظر.</p><div class="card" style="text-align:center;margin-bottom:12px;">نقطة الانطلاق: <b>الجزء ${cs.juz} — الثمن ${cs.thumn}</b>، من المنتصف</div><div class="btn-row"><button class="btn btn-gold" onclick="coachRandOK()">اجتزته بثقة ✓</button><button class="btn btn-ember" onclick="coachRandFail()">تعثرت — إعادة ⚠</button></div>`;
+  else body=`<div class="card" style="text-align:center;border-color:var(--gold-dim);padding:20px;"><div style="font-size:30px;margin-bottom:8px;">✦</div><div style="font-weight:600;margin-bottom:4px;">أُحسنت — الصفحة محفوظة مبدئياً</div><div style="font-size:11px;color:var(--parchment-dim);">حالات تردد في هذه الجلسة: ${cs.hesitations}</div></div><p class="secsub">سيُضاف هذا المحفوظ لجدول التكرار المتباعد (+1, +3, +7, +15, +30 يوماً). التثبيت الحقيقي يأتي من المرور الكامل بهذه المحطات.</p><button class="btn btn-gold" onclick="coachComplete()">حفظ الجلسة وإغلاقها ✓</button>`;
+  return `<h2 class="sectitle">رفيق الحفظ</h2><div class="stage-dots">${stages.slice(0,5).map((s,i)=>`<div class="stage-dot ${i===cs.stage?"on":i<cs.stage?"past":""}"></div>`).join("")}</div><div style="text-align:center;color:var(--parchment-dim);font-size:12px;margin-bottom:12px;">${stages[cs.stage]}</div>${cs.stage<5?`<div class="card"><div class="field-label">الثمن المستهدف</div><div class="btn-row"><select class="input-text" style="flex:1;" onchange="coachState.juz=parseInt(this.value);render()">${Array.from({length:30}).map((_,i)=>`<option value="${30-i}" ${cs.juz===30-i?"selected":""}>جزء ${30-i}</option>`).join("")}</select><select class="input-text" style="flex:1;" onchange="coachState.thumn=parseInt(this.value);render()">${Array.from({length:8}).map((_,i)=>`<option value="${i+1}" ${cs.thumn===i+1?"selected":""}>ثمن ${i+1}</option>`).join("")}</select></div></div>`:""}${body}${cs.stage<5?`<button class="btn btn-ghost" style="margin-top:12px;" onclick="coachState=freshCoach();render()">إعادة الجلسة من البداية</button>`:""}`;
 }
-function coachSetJuz(v){ coachState.juz = parseInt(v); render(); }
-function coachSetThumn(v){ coachState.thumn = parseInt(v); render(); }
-function coachRead(){ coachState.reads++; if(coachState.reads>=3){ coachState.stage=1; } render(); }
-function coachSegConfident(){ coachState.segStreak++; if(coachState.segStreak>=3){ coachState.segIndex++; coachState.segStreak=0; showToast("المقطع "+(coachState.segIndex-1)+" ثابت ✓"); } render(); }
-function coachSegHesitant(){ coachState.segStreak=0; coachState.hesitations++; render(); }
-function coachFinishSegments(){ coachState.stage=2; render(); }
-function coachFullConfident(){ coachState.fullStreak++; if(coachState.fullStreak>=3){ coachState.stage=3; } render(); }
-function coachFullHesitant(){ coachState.fullStreak=0; coachState.hesitations++; render(); }
-function coachAdvance(){ coachState.stage=4; render(); }
-function coachRandomPass(){ coachState.randomPassed=true; coachState.stage=5; render(); }
-function coachRandomFail(){ coachState.hesitations++; showToast("لا بأس — كرّر المقطع وحاول مجدداً قبل الاعتماد"); render(); }
-function resetCoach(){ const j=coachState.juz, t=coachState.thumn; coachState = freshCoachState(); coachState.juz=j; coachState.thumn=t; render(); }
-
+function coachRead(){coachState.reads++;if(coachState.reads>=3)coachState.stage=1;render();}
+function coachSegOK(){coachState.segStreak++;if(coachState.segStreak>=3){coachState.segIndex++;coachState.segStreak=0;showToast("المقطع "+(coachState.segIndex-1)+" ثابت ✓");}render();}
+function coachSegHes(){coachState.segStreak=0;coachState.hesitations++;render();}
+function coachFullOK(){coachState.fullStreak++;if(coachState.fullStreak>=3)coachState.stage=3;render();}
+function coachFullHes(){coachState.fullStreak=0;coachState.hesitations++;render();}
+function coachRandOK(){coachState.stage=5;render();}
+function coachRandFail(){coachState.hesitations++;showToast("لا بأس — كرّر المقطع قبل الاعتماد");render();}
 function coachComplete(){
-  const cs = coachState;
-  const today = todayISO();
-  const rec = getDaily(today);
-  rec.athmaanDone = (rec.athmaanDone||0) + 1;
-  rec.athmaanPlanned = rec.athmaanPlanned || recommendedAthmaan(currentDayNumber(state));
-  rec.hesitationCount = (rec.hesitationCount||0) + cs.hesitations;
-  rec.sessions = rec.sessions || [];
-  rec.sessions.push({juz:cs.juz, thumn:cs.thumn, hesitations:cs.hesitations, time:new Date().toISOString()});
-
-  const key = "j"+cs.juz+"-t"+cs.thumn;
-  state.quranMap[key] = "active";
-
-  const thumnLabel = "الجزء "+cs.juz+" — الثمن "+cs.thumn;
-  STAGE_OFFSETS.forEach((off, i)=>{
-    state.reviews.push({
-      id: "r"+Date.now()+"-"+i+"-"+Math.random().toString(36).slice(2,6),
-      thumnKey:key, thumnLabel, stage:STAGE_LABELS[i],
-      dueDate: addDaysISO(today, off), status:"pending"
-    });
-  });
-
-  saveKey(STORAGE_KEYS.daily, state.daily);
-  saveKey(STORAGE_KEYS.map, state.quranMap);
-  saveKey(STORAGE_KEYS.reviews, state.reviews);
-  showToast("أُضيفت الجلسة وجُدولت مراجعاتها تلقائياً");
-  coachState = freshCoachState();
-  checkAchievements();
-  switchTab("home");
+  const cs=coachState,today=todayISO(),rec=getDaily(today);
+  rec.athmaanDone=(rec.athmaanDone||0)+1;
+  rec.athmaanPlanned=rec.athmaanPlanned||recommendedAthmaan(currentDayN(state));
+  rec.hesitationCount=(rec.hesitationCount||0)+cs.hesitations;
+  rec.sessions=[...(rec.sessions||[]),{juz:cs.juz,thumn:cs.thumn,hesitations:cs.hesitations,time:new Date().toISOString()}];
+  const key="j"+cs.juz+"-t"+cs.thumn,label="الجزء "+cs.juz+" — الثمن "+cs.thumn;
+  state.quranMap[key]="active";
+  STAGE_OFFSETS.forEach((off,i)=>{state.reviews.push({id:"r"+Date.now()+"-"+i+"-"+Math.random().toString(36).slice(2,5),thumnKey:key,thumnLabel:label,stage:STAGE_LABELS[i],dueDate:addDaysISO(today,off),status:"pending"});});
+  saveKey(STORAGE_KEYS.daily,state.daily);saveKey(STORAGE_KEYS.map,state.quranMap);saveKey(STORAGE_KEYS.reviews,state.reviews);
+  showToast("أُضيفت الجلسة وجُدولت مراجعاتها ✓");
+  coachState=freshCoach();checkAchievements();switchTab("home");
 }
 
-/* ============================================================
-   REVIEW (spaced repetition)
-   ============================================================ */
+/* ============ REVIEW ============ */
 function renderReview(){
-  const today = todayISO();
-  const due = state.reviews.filter(r=>r.status==="pending" && r.dueDate<=today).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
-  const upcoming = state.reviews.filter(r=>r.status==="pending" && r.dueDate>today).sort((a,b)=>a.dueDate.localeCompare(b.dueDate)).slice(0,8);
-
-  let html = `<h2 class="sectitle">المراجعة والتكرار المتباعد</h2>
-  <p class="secsub">كل ثمن يمر بست محطات إلزامية: تثبيت فوري، قريب (+1ي)، متوسط (+3ي)، أسبوعي (+7ي)، بعيد (+15ي)، إدماج نهائي (+30ي).</p>`;
-
-  if(due.length===0){
-    html += `<div class="empty-state">لا توجد مراجعات مستحقة الآن — أحسنت الانضباط. عُد بعد إتمام جلسة حفظ جديدة.</div>`;
-  } else {
-    html += `<div class="card"><div class="card-title"><span>مستحقة الآن</span><span class="tag">${due.length}</span></div>`;
-    html += due.map(r=>`
-      <div class="list-item">
-        <div class="dot" style="background:${r.dueDate<today?'#c1622d':'#5fb3ab'};"></div>
-        <div class="li-label">${r.thumnLabel}<span class="note">مرحلة: ${r.stage}${r.dueDate<today?' — متأخرة منذ '+daysBetween(r.dueDate,today)+' يوم':''}</span></div>
-      </div>
-      <div class="btn-row" style="margin:-2px 0 10px;">
-        <button class="btn btn-sm btn-gold" onclick="reviewMark('${r.id}', true)">بثقة ✓</button>
-        <button class="btn btn-sm btn-ember" onclick="reviewMark('${r.id}', false)">بتردد ⚠</button>
-      </div>
-    `).join("");
-    html += `</div>`;
-  }
-
-  html += `<div class="card"><div class="card-title"><span>القادمة قريباً</span></div>`;
-  if(upcoming.length===0) html += `<div class="empty-state" style="padding:14px;">لا مراجعات مجدولة قادمة بعد.</div>`;
-  else html += upcoming.map(r=>`
-      <div class="list-item">
-        <div class="li-time" style="width:auto; margin-left:4px;">${r.dueDate.slice(5)}</div>
-        <div class="li-label">${r.thumnLabel}<span class="note">${r.stage}</span></div>
-      </div>`).join("");
-  html += `</div>`;
-
-  html += `<div class="card">
-    <div class="card-title"><span>الإغلاق المغلق (أسبوعي)</span></div>
-    <p style="font-size:11.5px; color:var(--parchment-dim); margin:0 0 10px;">أغلق المصحف، سمّع آخر 4 أثمان متتالية بصوت مسجَّل، ثم استمع لنفسك لرصد التردد الحقيقي.</p>
-    <button class="btn btn-ghost" onclick="showToast('سجّل صوتك الآن من تطبيق الصوت في هاتفك ثم عُد هنا')">تذكير فقط — سجّل خارج التطبيق</button>
-  </div>`;
-
-  return html;
+  const today=todayISO();
+  const due=state.reviews.filter(r=>r.status==="pending"&&r.dueDate<=today).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
+  const upcoming=state.reviews.filter(r=>r.status==="pending"&&r.dueDate>today).sort((a,b)=>a.dueDate.localeCompare(b.dueDate)).slice(0,8);
+  const done=state.reviews.filter(r=>r.status==="done").length;
+  let h=`<h2 class="sectitle">التكرار المتباعد</h2><p class="secsub">كل ثمن يمر بست محطات: +1، +3، +7، +15، +30 يوماً، ثم إدماج نهائي دائم.</p>`;
+  h+=`<div class="chiprow"><div class="chip"><div class="v">${due.length}</div><div class="l">مستحقة الآن</div></div><div class="chip"><div class="v">${upcoming.length}</div><div class="l">قريباً</div></div><div class="chip"><div class="v">${done}</div><div class="l">مكتملة</div></div></div>`;
+  if(due.length===0)h+=`<div style="text-align:center;padding:24px;color:var(--parchment-dim);font-size:12px;">لا توجد مراجعات مستحقة الآن — أحسنت الانضباط.</div>`;
+  else{h+=`<div class="card"><div class="card-title"><span>مستحقة الآن</span><span class="tag">${due.length}</span></div>`;h+=due.map(r=>`<div class="list-item"><div class="dot" style="background:${r.dueDate<today?"#c1622d":"#5fb3ab"};"></div><div class="li-label">${r.thumnLabel}<span class="note">مرحلة: ${r.stage}${r.dueDate<today?" — متأخرة "+daysBetween(r.dueDate,today)+" يوم":""}</span></div></div><div class="btn-row" style="margin:-2px 0 10px;"><button class="btn btn-sm btn-gold" onclick="reviewMark('${r.id}',true)">بثقة ✓</button><button class="btn btn-sm btn-ember" onclick="reviewMark('${r.id}',false)">بتردد ⚠</button></div>`).join("");h+=`</div>`;}
+  if(upcoming.length>0){h+=`<div class="card"><div class="card-title"><span>القادمة قريباً</span></div>`;h+=upcoming.map(r=>`<div class="list-item"><div class="li-time">${r.dueDate.slice(5)}</div><div class="li-label">${r.thumnLabel}<span class="note">${r.stage}</span></div></div>`).join("");h+=`</div>`;}
+  return h;
 }
-function reviewMark(id, confident){
-  const r = state.reviews.find(x=>x.id===id);
-  if(!r) return;
-  r.status = "done";
-  const today = todayISO();
-  const rec = getDaily(today);
-  if(confident){
-    if(r.stage==="إدماج نهائي"){ state.quranMap[r.thumnKey]="mastered"; showToast(r.thumnLabel+" أصبح مُدمَجاً بالكامل ✨"); }
-    else showToast("سُجّلت المراجعة بثقة ✓");
-  } else {
-    rec.hesitationCount = (rec.hesitationCount||0)+1;
-    state.reviews.push({
-      id:"r"+Date.now()+"-extra-"+Math.random().toString(36).slice(2,6),
-      thumnKey:r.thumnKey, thumnLabel:r.thumnLabel, stage:"تكرار إضافي",
-      dueDate: addDaysISO(today, 2), status:"pending"
-    });
-    showToast("جُدول تكرار إضافي بعد يومين");
-  }
-  saveKey(STORAGE_KEYS.reviews, state.reviews);
-  saveKey(STORAGE_KEYS.daily, state.daily);
-  saveKey(STORAGE_KEYS.map, state.quranMap);
-  checkAchievements();
-  render();
+function reviewMark(id,confident){
+  const r=state.reviews.find(x=>x.id===id);if(!r)return;
+  r.status="done";
+  if(confident){if(r.stage==="إدماج نهائي"){state.quranMap[r.thumnKey]="mastered";showToast(r.thumnLabel+" مُدمَج بالكامل ✨");}else showToast("مراجعة مسجّلة بثقة ✓");}
+  else{const rec=getDaily(todayISO());rec.hesitationCount=(rec.hesitationCount||0)+1;state.reviews.push({id:"r"+Date.now(),thumnKey:r.thumnKey,thumnLabel:r.thumnLabel,stage:"تكرار إضافي",dueDate:addDaysISO(todayISO(),2),status:"pending"});showToast("جُدول تكرار إضافي بعد يومين");}
+  saveKey(STORAGE_KEYS.reviews,state.reviews);saveKey(STORAGE_KEYS.daily,state.daily);saveKey(STORAGE_KEYS.map,state.quranMap);checkAchievements();render();
 }
 
-/* ============================================================
-   QURAN MAP
-   ============================================================ */
-const MAP_COLORS = {pending:"#1d3148", active:"#c9a24e", old:"#1f5c49", mastered:"#5fb3ab"};
-const MAP_LABELS = {pending:"لم يبدأ", active:"حفظ جديد جارٍ", old:"محفوظ سابقاً (يحتاج إحياء)", mastered:"مُدمَج بالكامل"};
-const MAP_CYCLE = ["pending","active","old","mastered"];
-
+/* ============ MAP ============ */
 function renderMap(){
-  const stats = mapStats();
-  let html = `<h2 class="sectitle">خريطة المصحف</h2>
-  <p class="secsub">٣٠ جزءاً × ٨ أثمان. القيم الافتراضية تقديرية (جزء عمّ نشط، وحتى المجادلة قديم) — اضغط أي خانة لتعديلها لتطابق محفوظك الفعلي.</p>`;
-
-  html += `<div class="chiprow">
-    <div class="chip"><div class="v">${stats.securedPct}%</div><div class="l">مؤمَّن (قديم+مُدمَج)</div></div>
-    <div class="chip"><div class="v">${stats.mastered}</div><div class="l">ثمن مُدمَج</div></div>
-    <div class="chip"><div class="v">${stats.active}</div><div class="l">حفظ جارٍ</div></div>
-  </div>`;
-
-  html += `<div class="card">`;
-  for(let j=JUZ_COUNT; j>=1; j--){
-    html += `<div class="map-row"><div class="map-juz-label">ج ${j}${j===30?' (عمّ)':''}</div><div class="map-cells">`;
-    for(let t=1;t<=THUMN_PER_JUZ;t++){
-      const key = "j"+j+"-t"+t;
-      const status = state.quranMap[key] || "pending";
-      html += `<div class="map-cell" style="background:${MAP_COLORS[status]};" title="الجزء ${j} — الثمن ${t}: ${MAP_LABELS[status]}" onclick="cycleMapCell('${key}')"></div>`;
-    }
-    html += `</div></div>`;
-  }
-  html += `</div>`;
-
-  html += `<div class="legend">${MAP_CYCLE.map(s=>`<div class="legend-item"><div class="legend-sw" style="background:${MAP_COLORS[s]};"></div>${MAP_LABELS[s]}</div>`).join("")}</div>`;
-  return html;
+  const stats=mapStats();
+  let h=`<h2 class="sectitle">خريطة المصحف</h2><p class="secsub">٣٠ جزءاً × ٨ أثمان. اضغط أي خانة للتبديل بين الحالات. القيم الافتراضية تقديرية — عدّلها لتطابق محفوظك الفعلي.</p>`;
+  h+=`<div class="chiprow"><div class="chip"><div class="v">${stats.securedPct}%</div><div class="l">مؤمَّن</div></div><div class="chip"><div class="v">${stats.mastered}</div><div class="l">ثمن مُدمَج</div></div><div class="chip"><div class="v">${stats.active}</div><div class="l">حفظ جارٍ</div></div></div>`;
+  h+=`<div class="card" style="overflow-x:auto;">`;
+  for(let j=30;j>=1;j--){h+=`<div class="map-row"><div class="map-juz-label">ج${j}${j===30?" ع":""}</div><div class="map-cells">`;for(let t=1;t<=8;t++){const k="j"+j+"-t"+t,st=state.quranMap[k]||"pending";h+=`<div class="map-cell" style="background:${MAP_COLORS[st]};" onclick="cycleMapCell('${k}')" title="${MAP_LABELS[st]}"></div>`;}h+=`</div></div>`;}
+  h+=`</div><div class="legend">${MAP_CYCLE.map(s=>`<div class="legend-item"><div class="legend-sw" style="background:${MAP_COLORS[s]};"></div>${MAP_LABELS[s]}</div>`).join("")}</div>`;
+  return h;
 }
-function cycleMapCell(key){
-  const cur = state.quranMap[key] || "pending";
-  const idx = MAP_CYCLE.indexOf(cur);
-  state.quranMap[key] = MAP_CYCLE[(idx+1)%MAP_CYCLE.length];
-  saveKey(STORAGE_KEYS.map, state.quranMap);
-  checkAchievements();
-  render();
-}
+function cycleMapCell(key){const cur=state.quranMap[key]||"pending";state.quranMap[key]=MAP_CYCLE[(MAP_CYCLE.indexOf(cur)+1)%MAP_CYCLE.length];saveKey(STORAGE_KEYS.map,state.quranMap);checkAchievements();render();}
 
-/* ============================================================
-   PROJECT (قمم القرافي)
-   ============================================================ */
+/* ============ PROJECT ============ */
 function renderProject(){
-  const today = todayISO();
-  const rec = getDaily(today);
-  rec.shaykhCorrections = rec.shaykhCorrections||0;
-  rec.athmaanPlanned = rec.athmaanPlanned || recommendedAthmaan(currentDayNumber(state));
-
-  const last3 = [];
-  for(let i=0;i<3;i++){ const d = addDaysISO(today,-i); last3.push(state.daily[d]); }
-  const readyToAdvance = last3.every(d=>d && (d.hesitationCount||0)===0 && (d.athmaanDone||0)>=(d.athmaanPlanned||0) && (d.athmaanDone||0)>0);
-
-  return `<h2 class="sectitle">مشروع قمم القرافي</h2>
-  <p class="secsub">جلسة التسميع أمام الشيخ من العصر إلى العشاء — ثبّت بطاقة اليوم هنا فور انتهاء الجلسة.</p>
-
-  <div class="card">
-    <div class="card-title"><span>الأثمان المعروضة اليوم</span><span class="tag">${rec.athmaanDone||0}/${rec.athmaanPlanned}</span></div>
-    <div class="stepper" style="justify-content:center; margin-bottom:6px;">
-      <button onclick="adjustField('athmaanDone',-1)">−</button>
-      <div style="font-family:var(--font-mono); font-size:22px; color:var(--gold-soft);">${rec.athmaanDone||0}</div>
-      <button onclick="adjustField('athmaanDone',1)">+</button>
-    </div>
-    <div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100,((rec.athmaanDone||0)/(rec.athmaanPlanned||1))*100)}%;"></div></div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span>تصحيحات الشيخ</span><span class="tag">${rec.shaykhCorrections}</span></div>
-    <p style="font-size:11.5px; color:var(--parchment-dim); margin:0 0 10px;">كل ما قلّ هذا الرقم، كان التحضير المسبق أنجح.</p>
-    <div class="stepper" style="justify-content:center;">
-      <button onclick="adjustField('shaykhCorrections',-1)">−</button>
-      <div style="font-family:var(--font-mono); font-size:22px; color:var(--gold-soft);">${rec.shaykhCorrections}</div>
-      <button onclick="adjustField('shaykhCorrections',1)">+</button>
-    </div>
-  </div>
-
-  <div class="card" style="border-color:${readyToAdvance?'var(--emerald-soft)':'var(--line)'};">
+  const today=todayISO(),rec=getDaily(today),dayN=currentDayN(state);
+  rec.athmaanPlanned=rec.athmaanPlanned||recommendedAthmaan(dayN);
+  const last3=Array.from({length:3}).map((_,i)=>state.daily[addDaysISO(today,-i)]);
+  const readyToAdvance=last3.every(d=>d&&(d.hesitationCount||0)===0&&(d.athmaanDone||0)>=(d.athmaanPlanned||0)&&(d.athmaanDone||0)>0);
+  return `<h2 class="sectitle">مشروع قمم القرافي</h2><p class="secsub">جلسة التسميع أمام الشيخ من العصر إلى العشاء. ثبّت بطاقة اليوم هنا فور انتهاء الجلسة.</p>
+  <div class="card"><div class="card-title"><span>الأثمان المعروضة اليوم</span><span class="tag">${rec.athmaanDone||0}/${rec.athmaanPlanned}</span></div><div class="stepper" style="justify-content:center;margin-bottom:8px;"><button onclick="adjF('athmaanDone',-1)">−</button><div style="font-family:var(--font-mono);font-size:24px;color:var(--gold-soft);width:48px;text-align:center;">${rec.athmaanDone||0}</div><button onclick="adjF('athmaanDone',1)">+</button></div><div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100,((rec.athmaanDone||0)/(rec.athmaanPlanned||1))*100)}%;"></div></div></div>
+  <div class="card"><div class="card-title"><span>تصحيحات الشيخ</span><span class="tag">${rec.shaykhCorrections||0}</span></div><p style="font-size:11px;color:var(--parchment-dim);margin:0 0 8px;">كلما قلّ هذا الرقم، كان تحضيرك المسبق أنجح.</p><div class="stepper" style="justify-content:center;"><button onclick="adjF('shaykhCorrections',-1)">−</button><div style="font-family:var(--font-mono);font-size:24px;color:var(--gold-soft);width:48px;text-align:center;">${rec.shaykhCorrections||0}</div><button onclick="adjF('shaykhCorrections',1)">+</button></div></div>
+  <div class="card" style="border-color:${readyToAdvance?"var(--emerald-soft)":"var(--line)"};">
     <div class="card-title"><span>القاعدة الذهبية للترقية</span></div>
-    <p style="font-size:12px; line-height:1.8; color:var(--parchment-dim);">لا تنتقل لزيادة الكمية إلا بتحقيق 3 أيام متتالية: صفر تردد + إنجاز الكمية كاملة. غير ذلك؟ ابقَ على نفس الكمية أسبوعاً إضافياً — هذا تطبيق لقاعدة "الإتقان قبل الكم"، لا تراجع.</p>
-    <div class="tag ${readyToAdvance?'done':''}" style="display:inline-block;">${readyToAdvance?'جاهز للترقية الأسبوع القادم ✓':'لم تكتمل الشروط بعد'}</div>
-  </div>
-  `;
+    <p style="font-size:11.5px;line-height:1.85;color:var(--parchment-dim);margin:0 0 8px;">3 أيام متتالية: صفر تردد + إنجاز الكمية كاملة. غير ذلك؟ ابقَ على نفس الكمية أسبوعاً إضافياً.</p>
+    <div class="tag ${readyToAdvance?"done":""}" style="display:inline-block;">${readyToAdvance?"جاهز للترقية الأسبوع القادم ✓":"الشروط لم تكتمل بعد"}</div>
+  </div>`;
 }
-function adjustField(field, delta){
-  const rec = getDaily(todayISO());
-  rec[field] = Math.max(0, (rec[field]||0)+delta);
-  saveKey(STORAGE_KEYS.daily, state.daily);
-  checkAchievements();
-  render();
-}
+function adjF(field,delta){const rec=getDaily(todayISO());rec[field]=Math.max(0,(rec[field]||0)+delta);saveKey(STORAGE_KEYS.daily,state.daily);checkAchievements();render();}
 
-/* ============================================================
-   HEALTH
-   ============================================================ */
+/* ============ HEALTH ============ */
 function renderHealth(){
-  const today = todayISO();
-  const rec = getDaily(today);
-  const target = todayWaterTarget();
-  const waterPct = Math.min(100, ((rec.waterMl||0)/target)*100);
-  const sleepTarget = 5.75;
-  rec.foodChecks = rec.foodChecks || {};
-  const foods = ["فطور (بيض + خبز أسمر + تمر)","غداء خفيف (بروتين + خضار)","تمر/موزة قبل الجلسة","عشاء خفيف جداً"];
-
+  const today=todayISO(),rec=getDaily(today),target=2700,pct=Math.min(100,((rec.waterMl||0)/target)*100);
+  const foods=["فطور: بيض + خبز أسمر + تمر","غداء خفيف: بروتين + خضار","تمر / موزة قبل الجلسة","عشاء خفيف جداً"];
   return `<h2 class="sectitle">الصحة والطاقة</h2>
-  <p class="secsub">وزنك (${state.profile.weightKg||55} كجم) يستلزم حداً أدنى ≈ ${(0.035*(state.profile.weightKg||55)).toFixed(1)} لتر؛ هدف الصيف 2.5–3 لتر.</p>
-
-  <div class="card">
-    <div class="card-title"><span>الماء</span><span class="tag">${((rec.waterMl||0)/1000).toFixed(2)} / ${(target/1000).toFixed(1)} ل</span></div>
-    <div class="water-row">
-      <svg class="water-cup" viewBox="0 0 54 70"><defs><clipPath id="cupclip"><path d="M8 6 H46 L40 64 a4 4 0 0 1-4 4 H18 a4 4 0 0 1-4-4 Z"/></clipPath></defs>
-        <path d="M8 6 H46 L40 64 a4 4 0 0 1-4 4 H18 a4 4 0 0 1-4-4 Z" fill="none" stroke="#9aa8b8" stroke-width="2"/>
-        <rect x="6" y="${70-(waterPct*0.62)}" width="42" height="${waterPct*0.62}" fill="#5fb3ab" clip-path="url(#cupclip)" opacity="0.85"/>
-      </svg>
-      <div style="flex:1;">
-        <div class="progress-bar" style="margin-bottom:10px;"><div class="progress-fill" style="width:${waterPct}%;"></div></div>
-        <div class="btn-row">
-          <button class="btn btn-sm btn-ghost" onclick="addWater(250)">+250 مل</button>
-          <button class="btn btn-sm btn-ghost" onclick="addWater(500)">+500 مل</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span>النوم</span><span class="tag">${(rec.sleepHours||0)} / ${sleepTarget} س</span></div>
-    <div class="stepper" style="justify-content:center; margin-bottom:10px;">
-      <button onclick="adjustSleep(-0.25)">−</button>
-      <div style="font-family:var(--font-mono); font-size:22px; color:var(--gold-soft);">${(rec.sleepHours||0).toFixed(2)} س</div>
-      <button onclick="adjustSleep(0.25)">+</button>
-    </div>
-    <label style="display:flex; align-items:center; gap:8px; font-size:13px;">
-      <input type="checkbox" ${rec.nap?'checked':''} onchange="toggleNap()" style="accent-color:#c9a24e; width:16px; height:16px;"> أنجزت القيلولة (35–40 د)
-    </label>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span>الوجبات</span></div>
-    ${foods.map((f,i)=>`
-      <label style="display:flex; align-items:center; gap:8px; font-size:13px; padding:6px 0; border-bottom:1px solid var(--line);">
-        <input type="checkbox" ${rec.foodChecks[i]?'checked':''} onchange="toggleFood(${i})" style="accent-color:#c9a24e; width:16px; height:16px;"> ${f}
-      </label>`).join("")}
-  </div>
-  `;
+  <div class="card"><div class="card-title"><span>الماء اليومي</span><span class="tag">${((rec.waterMl||0)/1000).toFixed(2)} / ${(target/1000).toFixed(1)} ل</span></div>
+  <div class="water-row">
+    <svg class="water-cup" viewBox="0 0 54 70"><defs><clipPath id="cc"><path d="M8 6H46L40 64a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4Z"/></clipPath></defs><path d="M8 6H46L40 64a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4Z" fill="none" stroke="#9aa8b8" stroke-width="2"/><rect x="6" y="${70-pct*0.62}" width="42" height="${pct*0.62}" fill="#5fb3ab" clip-path="url(#cc)" opacity=".85"/></svg>
+    <div style="flex:1;"><div class="progress-bar" style="margin-bottom:10px;"><div class="progress-fill" style="width:${pct}%;"></div></div><div class="btn-row"><button class="btn btn-sm btn-ghost" onclick="addWater(250)">+250 مل</button><button class="btn btn-sm btn-ghost" onclick="addWater(500)">+500 مل</button></div></div>
+  </div></div>
+  <div class="card"><div class="card-title"><span>النوم</span><span class="tag">${(rec.sleepHours||0)} / 5.75 س</span></div><div class="stepper" style="justify-content:center;margin-bottom:10px;"><button onclick="adjSleep(-0.25)">−</button><div style="font-family:var(--font-mono);font-size:22px;color:var(--gold-soft);width:64px;text-align:center;">${(rec.sleepHours||0).toFixed(2)} س</div><button onclick="adjSleep(0.25)">+</button></div><label style="display:flex;align-items:center;gap:8px;font-size:12.5px;"><input type="checkbox" ${rec.nap?"checked":""} onchange="toggleNap()" style="accent-color:#c9a24e;width:15px;height:15px;"> أنجزت القيلولة (35–40 د)</label></div>
+  <div class="card"><div class="card-title"><span>الوجبات</span></div>${foods.map((f,i)=>`<label style="display:flex;align-items:center;gap:8px;font-size:12.5px;padding:7px 0;border-bottom:1px solid var(--line);"><input type="checkbox" ${(rec.foodChecks||{})[i]?"checked":""} onchange="toggleFood(${i})" style="accent-color:#c9a24e;width:15px;height:15px;"> ${f}</label>`).join("")}</div>`;
 }
-function addWater(ml){ const rec=getDaily(todayISO()); rec.waterMl=(rec.waterMl||0)+ml; saveKey(STORAGE_KEYS.daily, state.daily); checkAchievements(); render(); }
-function adjustSleep(delta){ const rec=getDaily(todayISO()); rec.sleepHours=Math.max(0, Math.round(((rec.sleepHours||0)+delta)*100)/100); saveKey(STORAGE_KEYS.daily, state.daily); render(); }
-function toggleNap(){ const rec=getDaily(todayISO()); rec.nap=!rec.nap; saveKey(STORAGE_KEYS.daily, state.daily); render(); }
-function toggleFood(i){ const rec=getDaily(todayISO()); rec.foodChecks[i]=!rec.foodChecks[i]; saveKey(STORAGE_KEYS.daily, state.daily); render(); }
+function addWater(ml){const rec=getDaily(todayISO());rec.waterMl=(rec.waterMl||0)+ml;saveKey(STORAGE_KEYS.daily,state.daily);checkAchievements();render();}
+function adjSleep(d){const rec=getDaily(todayISO());rec.sleepHours=Math.max(0,Math.round(((rec.sleepHours||0)+d)*100)/100);saveKey(STORAGE_KEYS.daily,state.daily);render();}
+function toggleNap(){const rec=getDaily(todayISO());rec.nap=!rec.nap;saveKey(STORAGE_KEYS.daily,state.daily);render();}
+function toggleFood(i){const rec=getDaily(todayISO());rec.foodChecks=rec.foodChecks||{};rec.foodChecks[i]=!rec.foodChecks[i];saveKey(STORAGE_KEYS.daily,state.daily);render();}
 
-/* ============================================================
-   AWARDS / STATS / PROJECTION
-   ============================================================ */
-function checkAchievements(){
-  let changed=false;
-  ACHIEVEMENTS.forEach(a=>{
-    if(!state.achievements.includes(a.id) && a.cond(state)){
-      state.achievements.push(a.id); changed=true;
-      showToast("إنجاز جديد: "+a.t+" "+a.ic);
-    }
-  });
-  if(changed) saveKey(STORAGE_KEYS.achievements, state.achievements);
-}
-function last14Days(){
-  const arr = [];
-  for(let i=13;i>=0;i--){ const d = addDaysISO(todayISO(),-i); arr.push({date:d, rec:state.daily[d]}); }
-  return arr;
-}
-function barChartSVG(){
-  const data = last14Days();
-  const w=320,h=90,bw=18,gap=4;
-  const bars = data.map((d,i)=>{
-    const score = d.rec && d.rec.score!=null ? d.rec.score : (d.rec && (d.rec.athmaanDone||0)>0 ? 45 : 0);
-    const bh = Math.max(2,(score/100)*70);
-    const color = score>=90?"#5fb3ab":score>=75?"#c9a24e":score>=60?"#e08552":"#3a4a60";
-    const x = i*(bw+gap);
-    return `<rect x="${x}" y="${78-bh}" width="${bw}" height="${bh}" rx="3" fill="${color}"/>`;
-  }).join("");
-  return `<svg viewBox="0 0 ${data.length*(bw+gap)} 90" width="100%" height="90">${bars}<line x1="0" y1="78" x2="${data.length*(bw+gap)}" y2="78" stroke="#1d3148" stroke-width="1"/></svg>`;
-}
-function projection(){
-  const dayN = currentDayNumber(state);
-  const records = Object.values(state.daily).filter(d=>(d.athmaanDone||0)>0);
-  const avgScore = records.length ? Math.round(records.reduce((s,d)=>s+(d.score||60),0)/records.length) : 0;
-  const avgHes = records.length ? (records.reduce((s,d)=>s+(d.hesitationCount||0),0)/records.length).toFixed(1) : "0";
-  const onTrack = avgScore>=70;
-  const remaining = TOTAL_DAYS-dayN;
-  return {dayN, avgScore, avgHes, onTrack, remaining};
+/* ============ AWARDS ============ */
+function checkAchievements(){let ch=false;ACHIEVEMENTS.forEach(a=>{if(!state.achievements.includes(a.id)&&a.cond(state)){state.achievements.push(a.id);ch=true;showToast("إنجاز جديد: "+a.t+" "+a.ic);}});if(ch)saveKey(STORAGE_KEYS.achievements,state.achievements);}
+function barChart(){
+  const data=Array.from({length:14}).map((_,i)=>{const d=addDaysISO(todayISO(),-(13-i)),r=state.daily[d];const sc=r?.score!=null?r.score:((r?.athmaanDone||0)>0?45:0);return{d,sc};});
+  const bw=18,gap=3;
+  return`<svg viewBox="0 0 ${data.length*(bw+gap)} 90" width="100%" height="86">${data.map(({d,sc},i)=>{const bh=Math.max(2,(sc/100)*70),color=sc>=90?"#5fb3ab":sc>=75?"#c9a24e":sc>=60?"#e08552":"#3a4a60";return`<rect x="${i*(bw+gap)}" y="${78-bh}" width="${bw}" height="${bh}" rx="3" fill="${color}"/>${i===data.length-1?`<rect x="${i*(bw+gap)}" y="${78-bh}" width="${bw}" height="${bh}" rx="3" fill="${color}" opacity=".5"/>`:""}`}).join("")}<line x1="0" y1="78" x2="${data.length*(bw+gap)}" y2="78" stroke="#1d3148" stroke-width="1"/></svg>`;
 }
 function renderAwards(){
-  const p = projection();
-  const stats = mapStats();
-  return `<h2 class="sectitle">الإنجازات والإحصاءات</h2>
+  const dayN=currentDayN(state),records=Object.values(state.daily).filter(d=>(d.athmaanDone||0)>0);
+  const avgScore=records.length?Math.round(records.reduce((s,d)=>s+(d.score||60),0)/records.length):0;
+  const avgHes=records.length?(records.reduce((s,d)=>s+(d.hesitationCount||0),0)/records.length).toFixed(1):"0";
+  const stats=mapStats();
+  return`<h2 class="sectitle">الإنجازات والإحصاءات</h2>
+  <div class="card"><div class="card-title"><span>تقييم آخر 14 يوماً</span></div>${barChart()}<div class="legend" style="margin-top:6px;"><div class="legend-item"><div class="legend-sw" style="background:#5fb3ab;"></div>90+</div><div class="legend-item"><div class="legend-sw" style="background:#c9a24e;"></div>75–89</div><div class="legend-item"><div class="legend-sw" style="background:#e08552;"></div>60–74</div><div class="legend-item"><div class="legend-sw" style="background:#3a4a60;"></div>أقل من 60</div></div></div>
+  <div class="chiprow"><div class="chip"><div class="v">${avgScore}</div><div class="l">متوسط التقييم</div></div><div class="chip"><div class="v">${avgHes}</div><div class="l">متوسط التردد</div></div><div class="chip"><div class="v">${TOTAL_DAYS-dayN}</div><div class="l">أيام متبقية</div></div><div class="chip"><div class="v">${stats.securedPct}%</div><div class="l">تأمين المصحف</div></div></div>
+  <div class="card"><div class="card-title"><span>توقع نهاية الخطة</span></div><p style="font-size:12px;line-height:1.85;color:var(--parchment-dim);margin:0;">${avgScore>=70?"وتيرتك الحالية جيدة — استمر بنفس الانضباط واحرص على صفر تردد عند الشيخ لضمان الترقية في الأسبوع القادم.":"متوسط تقييمك دون 70 — ابطئ قليلاً واحرص على إتقان الكمية الحالية قبل أي ترقية. الإتقان قبل الكم."}</p></div>
+  <div class="ach-grid">${ACHIEVEMENTS.map(a=>`<div class="ach-card ${state.achievements.includes(a.id)?"unlocked":""}"><div class="ic">${a.ic}</div><div class="t">${a.t}</div></div>`).join("")}</div>`;
+}
 
-  <div class="card">
-    <div class="card-title"><span>اتجاه التقييم — 14 يوماً</span></div>
-    ${barChartSVG()}
+/* ============ SETTINGS ============ */
+function renderSettings(){
+  return`<h2 class="sectitle">الإعدادات</h2>
+  <div class="card"><span class="field-label">الاسم (اختياري)</span><input class="input-text" value="${state.profile.name||""}" onchange="updProf('name',this.value)" placeholder="اكتب اسمك"></div>
+  <div class="card"><span class="field-label">تاريخ بدء الخطة (اليوم 1)</span><input class="input-text" type="date" value="${state.profile.startDate}" onchange="updProf('startDate',this.value)"></div>
+  <div class="card"><span class="field-label">الوزن (كجم) — لحساب هدف الماء</span><input class="input-text" type="number" value="${state.profile.weightKg||55}" onchange="updProf('weightKg',parseFloat(this.value)||55)"></div>
+  <div class="card"><div class="card-title"><span>تصفير البيانات</span></div><p style="font-size:11px;color:var(--parchment-dim);margin:0 0 10px;">تُحفظ بياناتك محلياً على جهازك فقط ولا تُشارَك مع أحد.</p><button class="btn btn-ember" onclick="confirmReset()">تصفير كل البيانات</button></div>`;
+}
+function updProf(field,val){state.profile[field]=val;saveKey(STORAGE_KEYS.profile,state.profile);render();}
+function confirmReset(){openModal(`<div class="modal-handle"></div><h2 class="sectitle">تأكيد التصفير</h2><p class="secsub">سيُحذف كل تقدمك نهائياً ولا يمكن التراجع.</p><div class="btn-row"><button class="btn btn-ember" onclick="doReset()">نعم، صفّر كل شيء</button><button class="btn btn-ghost" onclick="closeModal()">تراجع</button></div>`);}
+async function doReset(){state={profile:defaultProfile(),daily:{},quranMap:defaultQuranMap(),reviews:[],achievements:[]};await Promise.all(Object.keys(STORAGE_KEYS).map(k=>saveKey(STORAGE_KEYS[k],state[k==="map"?"quranMap":k])));closeModal();showToast("تم التصفير");switchTab("home");}
+
+/* ============ ABOUT ============ */
+function renderAbout(){
+  return`
+  <div class="about-hero">
+    <svg width="80" height="80" viewBox="0 0 100 100"><g transform="translate(50,50)" fill="none" stroke="#c9a24e"><rect x="-40" y="-40" width="80" height="80" stroke-width="1.5" stroke-opacity=".7"/><rect x="-40" y="-40" width="80" height="80" transform="rotate(45)" stroke-width="1.5" stroke-opacity=".4"/><circle r="30" stroke-width="5" stroke="#c9a24e" stroke-opacity=".9" stroke-linecap="round"/><circle r="30" fill="none" stroke="#1d3148" stroke-width="6"/><circle r="30" fill="none" stroke="#c9a24e" stroke-width="6" stroke-linecap="round" stroke-dasharray="${(2*Math.PI*30).toFixed(1)}" stroke-dashoffset="${((2*Math.PI*30)*0.25).toFixed(1)}" transform="rotate(-90)"/><text x="0" y="5" text-anchor="middle" fill="#e4c77b" font-family="'IBM Plex Mono'" font-size="9" font-weight="600">v1.0.0</text></g></svg>
+    <div class="name">قُمَم</div>
+    <div class="subtitle">نظام يومك القرآني</div>
+    <div class="version-badge">الإصدار 1.0.0 — يونيو 2025</div>
+  </div>
+
+  <div class="author-card">
+    <div style="font-size:10.5px;color:var(--parchment-dim);letter-spacing:.06em;margin-bottom:3px;">رؤية وتطوير</div>
+    <div class="author-name">عبدالرحمن محمد ضو</div>
+    <div style="font-size:11px;color:var(--parchment-dim);margin-top:6px;line-height:1.7;">بشغف واعتناء، خدمةً لكتاب الله وحامليه</div>
   </div>
 
   <div class="card">
-    <div class="card-title"><span>التوقع المستقبلي</span></div>
-    <div class="chiprow">
-      <div class="chip"><div class="v">${p.avgScore}</div><div class="l">متوسط التقييم</div></div>
-      <div class="chip"><div class="v">${p.avgHes}</div><div class="l">متوسط التردد</div></div>
-      <div class="chip"><div class="v">${p.remaining}</div><div class="l">أيام متبقية</div></div>
-    </div>
-    <p style="font-size:12px; line-height:1.8; color:var(--parchment-dim); margin-top:4px;">
-      ${p.onTrack ? "وتيرتك الحالية تشير إلى وصولك لإتقان الأثمان الأربعة بنهاية الـ30 يوماً بإذن الله — استمر بنفس الانضباط." :
-      "متوسط تقييمك حالياً دون 70 — هذا لا يعني فشلاً، بل إشارة لإبطاء وتيرة الزيادة والتركيز على إتقان الكمية الحالية قبل أي ترقية جديدة (راجع القاعدة الذهبية في تبويب المشروع)."}
+    <div class="card-title"><span>عن قُمَم</span></div>
+    <p style="font-size:12.5px;line-height:2;color:var(--parchment-dim);margin:0;">
+      قُمَم رفيق يومي يحوّل خطة حفظ القرآن الكريم إلى منظومة عمل دقيقة ومُثبَّتة، مبنية على أحدث ما أثبته علم النفس المعرفي وعلى أصول الحفاظ المتقنين التي توارثناها.
     </p>
   </div>
 
   <div class="card">
-    <div class="card-title"><span>تأمين المصحف</span><span class="tag">${stats.securedPct}%</span></div>
-    <div class="progress-bar"><div class="progress-fill" style="width:${stats.securedPct}%;"></div></div>
+    <div class="card-title"><span>المنهجية العلمية</span></div>
+    ${[
+      ["الاسترجاع الفعّال","Active Recall — Roediger & Karpicke"],
+      ["التكرار المتباعد","Spaced Repetition — نظرية إبنغهاوس"],
+      ["علم بناء العادات","James Clear / BJ Fogg"],
+      ["فسيولوجيا النوم","تعويض القيلولة للمراهقين"],
+      ["طرق الحفاظ التقليدية","التلقين والسرد والربط"],
+      ["منهجية قمم القرافي","الأثمان الأربعة اليومية أمام الشيخ"]
+    ].map(([ar,en])=>`<div class="list-item"><div class="dot" style="background:var(--gold);"></div><div class="li-label">${ar}<span class="note">${en}</span></div></div>`).join("")}
   </div>
 
-  <div class="ach-grid">
-    ${ACHIEVEMENTS.map(a=>{
-      const unlocked = state.achievements.includes(a.id);
-      return `<div class="ach-card ${unlocked?'unlocked':''}"><div class="ic">${a.ic}</div><div class="t">${a.t}</div></div>`;
-    }).join("")}
-  </div>
-  `;
+  <div class="card" style="text-align:center;">
+    <div class="card-title" style="justify-content:center;"><span>حقوق النشر</span></div>
+    <div style="font-size:14px;font-weight:600;margin-bottom:4px;">© ${APP_YEAR} ${APP_AUTHOR}</div>
+    <div style="font-size:11px;color:var(--parchment-dim);">جميع الحقوق محفوظة</div>
+    <div style="font-family:var(--font-mono);font-size:9.5px;color:var(--gold-dim);margin-top:10px;">قُمَم v${APP_VERSION} — Qimam Quran OS</div>
+  </div>`;
 }
 
-/* ============================================================
-   SETTINGS
-   ============================================================ */
-function renderSettings(){
-  const p = state.profile;
-  return `<h2 class="sectitle">الإعدادات</h2>
+/* ============ MODALS ============ */
+function openModal(html){document.getElementById("modalRoot").innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">${html}</div></div>`;}
+function closeModal(){document.getElementById("modalRoot").innerHTML="";}
 
-  <div class="card">
-    <span class="field-label">الاسم (اختياري)</span>
-    <input class="input-text" value="${p.name||''}" onchange="updateProfile('name', this.value)" placeholder="اكتب اسمك">
-  </div>
-
-  <div class="card">
-    <span class="field-label">تاريخ بدء الخطة (اليوم 1)</span>
-    <input class="input-text" type="date" value="${p.startDate}" onchange="updateProfile('startDate', this.value)">
-  </div>
-
-  <div class="card">
-    <span class="field-label">الوزن (كجم) — لحساب هدف الماء</span>
-    <input class="input-text" type="number" value="${p.weightKg||55}" onchange="updateProfile('weightKg', parseFloat(this.value)||55)">
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span>بيانات الخطة</span></div>
-    <p style="font-size:11.5px; color:var(--parchment-dim); margin:0 0 10px;">تُحفظ بياناتك محلياً في حسابك فقط، ولا تُشارَك مع أحد.</p>
-    <button class="btn btn-ember" onclick="confirmReset()">تصفير كل البيانات</button>
-  </div>
-  `;
-}
-function updateProfile(field, val){ state.profile[field]=val; saveKey(STORAGE_KEYS.profile, state.profile); render(); }
-function confirmReset(){
-  openModal(`
-    <div class="modal-handle"></div>
-    <h2 class="sectitle">تأكيد التصفير</h2>
-    <p class="secsub">سيُحذف كل تقدمك (الحفظ، المراجعات، الخريطة، الإنجازات) نهائياً. لا يمكن التراجع.</p>
-    <div class="btn-row"><button class="btn btn-ember" onclick="doReset()">نعم، صفّر كل شيء</button><button class="btn btn-ghost" onclick="closeModal()">تراجع</button></div>
-  `);
-}
-async function doReset(){
-  state = {profile:defaultProfile(), daily:{}, quranMap:defaultQuranMap(), reviews:[], achievements:[]};
-  await Promise.all([
-    saveKey(STORAGE_KEYS.profile, state.profile), saveKey(STORAGE_KEYS.daily, state.daily),
-    saveKey(STORAGE_KEYS.map, state.quranMap), saveKey(STORAGE_KEYS.reviews, state.reviews),
-    saveKey(STORAGE_KEYS.achievements, state.achievements)
-  ]);
-  closeModal(); showToast("تم التصفير"); switchTab("home");
-}
-
-/* ============================================================
-   MODALS: eval, random test, fatigue
-   ============================================================ */
-function openModal(html){
-  document.getElementById("modalRoot").innerHTML = `<div class="modal-overlay" onclick="if(event.target===this) closeModal()"><div class="modal">${html}</div></div>`;
-}
-function closeModal(){ document.getElementById("modalRoot").innerHTML = ""; }
-
-let evalDraft = {};
-function openEvalModal(){
-  const rec = getDaily(todayISO());
-  evalDraft = rec.scoreBreakdown ? {...rec.scoreBreakdown} : {};
-  renderEvalModal();
-}
+let evalDraft={};
+function openEvalModal(){const rec=getDaily(todayISO());evalDraft=rec.scoreBreakdown?{...rec.scoreBreakdown}:{};renderEvalModal();}
 function renderEvalModal(){
-  const options = [100,75,50,25,0];
-  let total = 0;
-  EVAL_CRITERIA.forEach(c=>{ total += ((evalDraft[c.key]||0)/100)*c.weight; });
-  total = Math.round(total);
-  openModal(`
-    <div class="modal-handle"></div>
-    <h2 class="sectitle">تقييم اليوم</h2>
-    <p class="secsub">اختر نسبة إنجازك لكل معيار. النتيجة الإجمالية: <b style="color:var(--gold-soft);">${total}/100</b></p>
-    ${EVAL_CRITERIA.map(c=>`
-      <div style="margin-bottom:14px;">
-        <div style="font-size:12.5px; margin-bottom:6px; display:flex; justify-content:space-between;"><span>${c.label}</span><span style="color:var(--parchment-dim); font-family:var(--font-mono);">${c.weight}</span></div>
-        <div class="sel-row">${options.map(o=>`<div class="sel-btn ${(evalDraft[c.key]||0)===o?'active':''}" onclick="setEvalVal('${c.key}',${o})">${o}%</div>`).join("")}</div>
-      </div>`).join("")}
-    <button class="btn btn-gold" onclick="saveEval()">حفظ التقييم</button>
-  `);
+  let total=0;EVAL_CRITERIA.forEach(c=>{total+=((evalDraft[c.key]||0)/100)*c.weight;});total=Math.round(total);
+  const opts=[100,75,50,25,0];
+  openModal(`<div class="modal-handle"></div><h2 class="sectitle">تقييم اليوم</h2><p class="secsub">النتيجة الإجمالية: <b style="color:var(--gold-soft);">${total}/100</b> — ${total>=90?"ممتاز":total>=75?"جيد جداً":total>=60?"يحتاج تعديلاً":"راجع السبب"}</p>${EVAL_CRITERIA.map(c=>`<div style="margin-bottom:12px;"><div style="font-size:12px;margin-bottom:5px;display:flex;justify-content:space-between;"><span>${c.label}</span><span style="color:var(--parchment-dim);font-family:var(--font-mono);">${c.weight}</span></div><div class="sel-row">${opts.map(o=>`<div class="sel-btn ${(evalDraft[c.key]||0)===o?"active":""}" onclick="setEv('${c.key}',${o})">${o}%</div>`).join("")}</div></div>`).join("")}<button class="btn btn-gold" onclick="saveEval()">حفظ التقييم</button>`);
 }
-function setEvalVal(key, val){ evalDraft[key]=val; renderEvalModal(); }
-function saveEval(){
-  const rec = getDaily(todayISO());
-  let total = 0;
-  EVAL_CRITERIA.forEach(c=>{ total += ((evalDraft[c.key]||0)/100)*c.weight; });
-  rec.score = Math.round(total);
-  rec.scoreBreakdown = {...evalDraft};
-  saveKey(STORAGE_KEYS.daily, state.daily);
-  closeModal(); showToast("سُجّل تقييم اليوم: "+rec.score+"/100");
-  checkAchievements();
-  render();
-}
+function setEv(key,val){evalDraft[key]=val;renderEvalModal();}
+function saveEval(){const rec=getDaily(todayISO());let t=0;EVAL_CRITERIA.forEach(c=>{t+=((evalDraft[c.key]||0)/100)*c.weight;});rec.score=Math.round(t);rec.scoreBreakdown={...evalDraft};saveKey(STORAGE_KEYS.daily,state.daily);closeModal();showToast("تقييم اليوم: "+rec.score+"/100");checkAchievements();render();}
 
 function openRandomTest(){
-  const candidates = Object.keys(state.quranMap).filter(k=>state.quranMap[k]==="old"||state.quranMap[k]==="mastered"||state.quranMap[k]==="active");
-  if(candidates.length===0){ showToast("لا يوجد محفوظ مسجَّل بعد في الخريطة"); return; }
-  const key = candidates[Math.floor(Math.random()*candidates.length)];
-  const [jpart, tpart] = key.split("-");
-  const j = jpart.slice(1), t = tpart.slice(1);
-  openModal(`
-    <div class="modal-handle"></div>
-    <h2 class="sectitle">اختبار الانطلاق العشوائي</h2>
-    <div class="card" style="text-align:center;">ابدأ التسميع من منتصف: <br><b style="font-size:18px; color:var(--gold-soft);">الجزء ${j} — الثمن ${t}</b></div>
-    <p class="secsub">لا تبدأ من أول السورة — هذا هو جوهر الاختبار. استمر بثقة دون نظر.</p>
-    <div class="btn-row">
-      <button class="btn btn-gold" onclick="randomTestResult(true,'${key}')">اجتزته بثقة ✓</button>
-      <button class="btn btn-ember" onclick="randomTestResult(false,'${key}')">تعثرت ⚠</button>
-    </div>
-  `);
+  const cands=Object.keys(state.quranMap).filter(k=>["old","mastered","active"].includes(state.quranMap[k]));
+  if(!cands.length){showToast("لا يوجد محفوظ مسجَّل في الخريطة بعد");return;}
+  const k=cands[Math.floor(Math.random()*cands.length)],j=k.split("-")[0].slice(1),t=k.split("-")[1].slice(1);
+  openModal(`<div class="modal-handle"></div><h2 class="sectitle">اختبار الانطلاق العشوائي</h2><div class="card" style="text-align:center;margin-bottom:12px;">ابدأ من منتصف:<br><b style="font-size:18px;color:var(--gold-soft);">الجزء ${j} — الثمن ${t}</b></div><p class="secsub">لا تبدأ من أول السورة — هذا هو جوهر الاختبار.</p><div class="btn-row"><button class="btn btn-gold" onclick="rndResult(true,'${k}')">اجتزته بثقة ✓</button><button class="btn btn-ember" onclick="rndResult(false,'${k}')">تعثرت ⚠</button></div>`);
 }
-function randomTestResult(pass, key){
-  if(!pass){
-    const rec = getDaily(todayISO());
-    rec.hesitationCount = (rec.hesitationCount||0)+1;
-    if(state.quranMap[key]==="mastered") state.quranMap[key]="old";
-    saveKey(STORAGE_KEYS.daily, state.daily);
-    saveKey(STORAGE_KEYS.map, state.quranMap);
-    showToast("سُجّل التعثر — راجع هذا الثمن اليوم ضمن مسار المحفوظ القديم");
-  } else {
-    showToast("ممتاز — استرجاع حقيقي لا اعتماد على النظر");
-  }
+function rndResult(pass,key){
+  if(!pass){const rec=getDaily(todayISO());rec.hesitationCount=(rec.hesitationCount||0)+1;if(state.quranMap[key]==="mastered")state.quranMap[key]="old";saveKey(STORAGE_KEYS.daily,state.daily);saveKey(STORAGE_KEYS.map,state.quranMap);showToast("راجع هذا الثمن اليوم");}
+  else showToast("ممتاز — استرجاع حقيقي ✓");
   closeModal();
 }
 
 function openFatigue(){
-  openModal(`
-    <div class="modal-handle"></div>
-    <h2 class="sectitle">نمط الفتور</h2>
-    <p class="secsub">الفتور طبيعي فسيولوجياً ونفسياً — ليس فشلاً أخلاقياً. التعامل معه بهدوء عملي أهم من جلد الذات.</p>
-    <div class="card"><div class="card-title"><span>قاعدة الخمس دقائق</span></div>
-      <p style="font-size:12px; color:var(--parchment-dim); margin:0 0 10px;">التزم بخمس دقائق فقط من الورد. غالباً يعود الزخم بعدها تلقائياً.</p>
-      <button class="btn btn-gold" onclick="startFatigueTimer()">ابدأ 5 دقائق فقط</button>
-    </div>
-    <div class="card"><div class="card-title"><span>غيّر الزاوية</span></div>
-      <p style="font-size:12px; color:var(--parchment-dim); margin:0;">سمّع لشخص آخر بدل القراءة الفردية، أو سجّل صوتك واستمع له بدل القراءة المباشرة.</p>
-    </div>
-    <div class="card"><div class="card-title"><span>اذكر سبب البدء</span></div>
-      <p style="font-size:12px; color:var(--parchment-dim); margin:0;">ذكّر نفسك لحظياً بسبب بدئك — إعادة بناء علاقتك بالقرآن، وتجاوز قدرتك السابقة.</p>
-    </div>
-  `);
+  openModal(`<div class="modal-handle"></div><h2 class="sectitle">نمط الفتور</h2><p class="secsub">الفتور طبيعي فسيولوجياً ونفسياً — التعامل معه بهدوء أهم من جلد الذات.</p>
+  <div class="card"><div class="card-title"><span>قاعدة الخمس دقائق</span></div><p style="font-size:12px;color:var(--parchment-dim);margin:0 0 10px;">التزم بخمس دقائق فقط. غالباً يعود الزخم بعدها تلقائياً.</p><button class="btn btn-gold" onclick="startFatigueTimer()">ابدأ 5 دقائق فقط ⏱</button></div>
+  <div class="card"><div class="card-title"><span>غيّر الزاوية</span></div><p style="font-size:12px;color:var(--parchment-dim);margin:0;">سمّع لشخص آخر، أو سجّل صوتك واستمع له بدل القراءة الفردية.</p></div>
+  <div class="card"><div class="card-title"><span>اذكر سبب بدئك</span></div><p style="font-size:12px;color:var(--parchment-dim);margin:0;">إعادة بناء علاقتك بكتاب الله — تجاوز قدرتك السابقة. ذكّر نفسك بهذا الآن.</p></div>`);
 }
-let fatigueInterval = null;
+let _fi=null;
 function startFatigueTimer(){
-  let secs = 300;
-  openModal(`
-    <div class="modal-handle"></div>
-    <h2 class="sectitle">5 دقائق فقط</h2>
-    <div class="counter-circle" style="width:140px; height:140px;"><div class="n" id="fatigueClock" style="font-size:26px;">05:00</div><div class="lab">لا تفكّر بأكثر من هذا</div></div>
-    <button class="btn btn-ghost" onclick="closeModal()">إغلاق</button>
-  `);
-  clearInterval(fatigueInterval);
-  fatigueInterval = setInterval(()=>{
-    secs--;
-    const el = document.getElementById("fatigueClock");
-    if(!el){ clearInterval(fatigueInterval); return; }
-    const m = Math.floor(secs/60), s = secs%60;
-    el.textContent = pad(m)+":"+pad(s);
-    if(secs<=0){ clearInterval(fatigueInterval); showToast("انتهت الخمس دقائق — هل تتابع؟"); closeModal(); }
-  },1000);
+  let s=300;
+  openModal(`<div class="modal-handle"></div><h2 class="sectitle">5 دقائق فقط</h2><div class="counter-circle" style="width:130px;height:130px;"><div class="n" id="ftc" style="font-size:28px;">05:00</div><div class="lab">لا تفكّر بأكثر</div></div><button class="btn btn-ghost" onclick="closeModal()">إغلاق</button>`);
+  clearInterval(_fi);
+  _fi=setInterval(()=>{s--;const el=document.getElementById("ftc");if(!el){clearInterval(_fi);return;}el.textContent=pad(Math.floor(s/60))+":"+pad(s%60);if(s<=0){clearInterval(_fi);showToast("انتهت الخمس دقائق — هل تتابع؟");closeModal();}},1000);
 }
 
-/* ---------------- boot ---------------- */
+/* ============ BOOT ============ */
 initApp();
 </script>
 </body>
