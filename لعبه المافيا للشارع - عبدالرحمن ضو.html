@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مافيا الشارع — الحكم في جوالك</title>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1f1e1b;--sf:#2a2925;--sf2:#38362f;--tx:#f1ecdf;--mu:#a8a392;--ac:#c4283a;--gd:#e2c06b;--gr:#2a8f5c;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#e9e1cf;--sf:#f6f0e0;--sf2:#ddd3ba;--tx:#1a1915;--mu:#6a665a;--gd:#8a6512;color-scheme:light}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Almarai,Tahoma,sans-serif;line-height:1.7;min-height:100vh}
+.w{max-width:560px;margin:auto;padding:14px 16px 44px}
+.fl{height:12px;background:linear-gradient(#c4283a 0 25%,#0d0d0d 25% 75%,#2a8f5c 75%);border-radius:2px;outline:1px solid #8886;margin-bottom:16px}
+h1,h2,h3,.tag,.tm,.big{font-family:Lalezar,Almarai,sans-serif;font-weight:400}
+h1{font-size:3.4rem;line-height:1.05;margin:0}
+h1 small{display:block;font:400 1rem Almarai,sans-serif;color:var(--mu);margin-top:6px}
+h2{font-size:1.9rem;margin:6px 0}
+h3{font-size:1.3rem;margin:0 0 6px;color:var(--gd)}
+.stp0{display:inline-block;transform:rotate(-2.5deg);border:2px dashed var(--ac);color:var(--ac);padding:2px 12px;margin:10px 0;font-family:Lalezar,sans-serif;font-size:1.15rem}
+.mu{color:var(--mu);font-size:.9rem;margin:6px 0}
+.card{background:var(--sf);border:1px solid var(--sf2);border-radius:6px;padding:14px;margin:14px 0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gd);outline-offset:2px}
+.btn{display:block;width:100%;padding:13px;margin:10px 0;border-radius:6px;border:2px solid var(--sf2);background:var(--sf2);font:400 1.25rem Lalezar,sans-serif}
+.btn.red{background:var(--ac);border-color:var(--ac);color:#fff}
+.btn.gold{background:none;border-color:var(--gd);color:var(--gd)}
+.btn:disabled{opacity:.4}
+.rl{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--sf2)}
+.rl b{display:block}.rl span{font-size:.78rem;color:var(--mu);line-height:1.4;display:block}
+.stp{display:flex;align-items:center;gap:8px;flex:none}
+.stp button{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gd);background:none;font-size:1.3rem;color:var(--gd);line-height:1}
+.stp i{font:400 1.5rem Lalezar,sans-serif;min-width:26px;text-align:center;font-style:normal}
+.tot{display:flex;justify-content:space-between;align-items:baseline}
+.big{font-size:2.6rem;color:var(--gd)}
+.pre{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pre button{padding:6px 12px;border-radius:20px;border:1px solid var(--gd);background:none;color:var(--gd);font-size:.85rem}
+input[type=text],input[type=password],input:not([type]){width:100%;padding:10px;margin:3px 0;border-radius:4px;border:1px solid var(--sf2);background:var(--bg);color:var(--tx);font:inherit}
+.names{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.chk{display:flex;gap:8px;align-items:center;margin:8px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.pl{padding:14px 8px;border-radius:4px;border:1.5px solid var(--sf2);background:var(--sf);font:400 1.2rem Lalezar,sans-serif;display:flex;flex-direction:column;align-items:center}
+.pl:nth-child(odd){transform:rotate(-.8deg)}.pl:nth-child(even){transform:rotate(.7deg)}
+.pl span{font:400 .75rem Almarai,sans-serif;color:var(--mu)}
+.pl.done{opacity:.4}.pl.sel{border-color:var(--gd);background:var(--sf2)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.bar button{padding:6px 12px;border-radius:4px;border:1px solid var(--gd);background:none;color:var(--gd)}
+.tag{color:var(--gd);font-size:1.15rem}
+.ann{font-size:1.15rem;border-right:4px solid var(--ac);padding-right:12px;margin:10px 0}
+.tm{font-size:4rem;text-align:center;color:var(--gd);line-height:1.2}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cd{width:min(68vw,250px);aspect-ratio:63/88;border-radius:12px;margin:14px auto;display:grid;place-items:center;text-align:center;padding:14px;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none}
+.cd.back{background:repeating-linear-gradient(45deg,#4a1219,#4a1219 9px,#5c1a23 9px,#5c1a23 18px);border:3px double var(--gd);color:var(--gd);font:400 1.4rem Lalezar,sans-serif}
+.cd.front{background:#efe5cc;color:#1a1915;border:3px solid var(--ac);display:flex;flex-direction:column;justify-content:center;gap:8px}
+.cd.front b{font:400 2rem Lalezar,sans-serif}.cd.front small{font-size:.85rem;line-height:1.5}
+#modal{position:fixed;inset:0;background:rgba(10,10,8,.93);z-index:20;display:none;overflow:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
+#modal>div{max-width:420px;margin:auto}
+#toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ac);color:#fff;padding:10px 16px;border-radius:6px;display:none;z-index:30}
+.lg{font-size:.88rem;color:var(--mu);margin:2px 0}
+table{width:100%;border-collapse:collapse}td{padding:6px 4px;border-bottom:1px solid var(--sf2)}
+details{margin:10px 0;color:var(--mu);font-size:.9rem}summary{cursor:pointer;color:var(--gd)}
+.ft{text-align:center;margin-top:26px;font:400 1.1rem Lalezar,sans-serif;color:var(--gd)}
+</style>
+</head>
+<body>
+<div class="w" id="app"></div>
+<div id="modal"><div id="mb"></div></div>
+<div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const R={
+cit:{n:'مواطن',d:'ما عندك قدرة. اتكلم، صوّت، وشوف منو المافيا.'},
+doc:{n:'الدكتور',d:'كل ليلة تنقذ واحد من القتل.'},
+snp:{n:'القناص',d:'عندك طلقة وحدة طول اللعبة. تصيب مافيا يموت، تغلط تموت انت.'},
+inv:{n:'المحقق',d:'كل ليلة تسأل الحكم على واحد: مافيا ولا لا.'},
+grd:{n:'الحارس',d:'تحمي واحد كل ليلة، وإذا جاه القتل تموت انت بداله.'},
+hnt:{n:'الصيّاد',d:'إذا طلّعوك بالتصويت، تضرب واحد قبل ما تروح.'},
+jok:{n:'المهرج',d:'تغلب إذا الربع صوّتوا عليك وطلّعوك.'},
+mf:{n:'مافيا',d:'مافيا عادي، بلا قدرة. غطّي على ربعك.'},
+mk:{n:'مافيا (قتل)',d:'تقتل واحد كل ليلة.'},
+ms:{n:'مافيا (إسكات)',d:'تسكّت واحد، ما يتكلمش نهار اليوم اللي بعده.'},
+mks:{n:'مافيا (قتل وإسكات)',d:'تقتل وتسكّت.'}};
+const GA=['cit','doc','snp','inv','grd','hnt','jok'],GB=['mf','mk','ms','mks'],RK=[...GA,...GB];
+const PRE=[['رزمتك (12)',{cit:7,doc:1,snp:1,mk:1,ms:1,mks:1}],['9 لاعبين',{cit:5,doc:1,snp:1,mk:1,mks:1}],['7 لاعبين',{cit:4,doc:1,mk:1,mks:1}]];
+const SX={kill:['المافيا تفتح عيونها (القتل)','منو نقتلو الليلة؟'],sil:['المافيا تفتح عيونها (الإسكات)','منو نسكّتو بكرة؟'],doc:['الدكتور يفتح عينيه','منو تنقذ؟'],grd:['الحارس يفتح عينيه','منو تحمي؟'],inv:['المحقق يفتح عينيه','على منو تشك؟'],snp:['القناص يفتح عينيه','على منو تضرب؟ ولا تخلّي الرصاصة؟']};
+const isM=r=>r[0]=='m';
+const lc=()=>{try{return JSON.parse(localStorage.getItem('mafia.c'))}catch(e){return null}};
+let D={c:lc()||{...PRE[0][1]},names:[],pin:'',rev:1},G=null,V='setup',timer=null,left=0,sel=null;
+const tot=()=>RK.reduce((a,k)=>a+(D.c[k]||0),0),mc=()=>GB.reduce((a,k)=>a+(D.c[k]||0),0);
+
+function rnd(n){const a=new Uint32Array(1),lim=4294967296-4294967296%n;let x;do{crypto.getRandomValues(a);x=a[0]}while(x>=lim);return x%n}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
+async function H(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('mafia:'+s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return s}}
+const st=()=>{try{return JSON.parse(localStorage.getItem('mafia.st'))||{g:0,m:0,c:0}}catch(e){return{g:0,m:0,c:0}}};
+const sv=()=>{try{localStorage.setItem('mafia.g',JSON.stringify({G,V}))}catch(e){}};
+const ld=()=>{try{return JSON.parse(localStorage.getItem('mafia.g'))}catch(e){return null}};
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',2400)}
+function M(h){$('#mb').innerHTML=h;$('#modal').style.display='block'}
+function cm(){$('#modal').style.display='none';$('#mb').innerHTML=''}
+function wake(){try{navigator.wakeLock&&navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}}
+function render(){if(timer&&!(G&&G.phase=='day')){clearInterval(timer);timer=null}
+V=='setup'?setup():V=='deal'?deal():({night,day,hunt,end})[G.phase]()}
+
+/* ---------- setup: الحكم يحدد الورق كل جولة ---------- */
+function cnt(k,d){const v=Math.max(0,(D.c[k]||0)+d);if(d>0&&tot()>=20)return toast('الحد الأقصى 20 لاعب');D.c[k]=v;setup()}
+const row=k=>`<div class="rl"><div><b>${R[k].n}</b><span>${R[k].d}</span></div><div class="stp"><button aria-label="نقّص ${R[k].n}" onclick="cnt('${k}',-1)">−</button><i>${D.c[k]||0}</i><button aria-label="زيّد ${R[k].n}" onclick="cnt('${k}',1)">+</button></div></div>`;
+function setup(){const r=ld(),s=st(),n=tot();
+$('#app').innerHTML=`<div class="fl"></div><h1>مافيا الشارع<small>الحكم في جوالك، ما عادش تحتاج واحد يقعد يحكم.</small></h1>
+<div class="stp0">صنع عبدالرحمن محمد ضو</div>
+<p class="mu">جوال واحد يلفّ بين الربع، يوزّع الورق في السر ويدير الليل والنهار. انت بس تحدد كم ورقة من كل دور قبل كل جولة.</p>
+${r&&r.G&&r.V!='setup'&&r.G.phase!='end'?`<button class="btn gold" onclick="resume()">كمّل اللعبة اللي فاتت</button>`:''}
+<div class="card"><div class="tot"><h3>الورق في هالجولة</h3><span class="big">${n}</span></div><p class="mu">المجموع هو عدد اللاعبين، وكل ما تزيد ورقة يزيد لاعب.</p>
+<div class="pre">${PRE.map((p,i)=>`<button onclick="D.c={...PRE[${i}][1]};setup()">${p[0]}</button>`).join('')}</div>
+<h3 style="margin-top:12px">جهة المواطنين</h3>${GA.map(row).join('')}
+<h3 style="margin-top:12px">جهة المافيا</h3>${GB.map(row).join('')}
+<p class="mu">المافيا ${mc()} · الباقي ${n-mc()}</p></div>
+<div class="card"><h3>أسامي الربع</h3><div class="names">${Array.from({length:n},(_,i)=>`<input value="${esc(D.names[i]||'')}" placeholder="لاعب ${i+1}" maxlength="14" oninput="D.names[${i}]=this.value">`).join('')}</div></div>
+<div class="card"><h3>رمز الحكم (إذا تبي)</h3><input inputmode="numeric" maxlength="4" placeholder="4 أرقام" value="${esc(D.pin)}" oninput="D.pin=this.value"><p class="mu">يحمي لوحة الأدوار من الفضوليين. يتخزن مشفّر في جوالك وما يخرجش منه.</p>
+<label class="chk"><input type="checkbox" ${D.rev?'checked':''} onchange="D.rev=this.checked?1:0"> نكشفو دور اللي يخرج من اللعبة</label></div>
+<details><summary>القواعد في هالنسخة</summary><p>الليل يمشي بالترتيب: المافيا تقتل ثم تسكّت، الدكتور ينقذ، الحارس يحمي، المحقق يسأل، القناص يضرب. إذا الدكتور أنقذ ضحية القتل ما مات حد. المتسكّت يصمت نهار اليوم اللي بعده. المافيا تغلب لما يتساوى عددها مع الباقي، والربع يغلبو لما تخلص المافيا. المهرج يغلب لو طلّعوه بالتصويت. الصيّاد يضرب واحد لو طلعوه بالتصويت.</p></details>
+<button class="btn red" onclick="startGame()">وزّع الورق</button>
+<p class="lg">على جوالك: ${s.g} لعبة · المافيا غلبت ${s.m} · الربع غلبو ${s.c}</p>
+<div class="ft">صنع عبدالرحمن محمد ضو</div>`}
+async function startGame(){const n=tot(),m=mc();
+if(n<4)return toast('الأقل 4 لاعبين');
+if(!m)return toast('لازم مافيا واحد على الأقل');
+if(m>=n-m)return toast('لازم الباقي يكونو أكثر من المافيا');
+if(D.pin&&!/^\d{4}$/.test(D.pin))return toast('الرمز لازم 4 أرقام');
+try{localStorage.setItem('mafia.c',JSON.stringify(D.c))}catch(e){}
+const roles=shuffle(RK.flatMap(k=>Array(D.c[k]||0).fill(k)));
+G={n,names:Array.from({length:n},(_,i)=>(D.names[i]||'').trim()||'لاعب '+(i+1)),roles,dealt:[],alive:roles.map(()=>1),sil:-1,round:1,used:0,log:[],t0:Date.now(),pin:D.pin?await H(D.pin):'',rev:D.rev,phase:'night',N:{},s:0,ann:'',win:'',vt:null};
+V='deal';wake();sv();render()}
+function resume(){const r=ld();G=r.G;V=r.V;wake();render()}
+
+/* ---------- توزيع الورق ---------- */
+function deal(){const k=G.dealt.length;
+$('#app').innerHTML=`<div class="fl"></div><h2>توزيع الورق</h2><p class="mu">اضغط على اسمك، وبعدين دوس مطوّل على الورقة تشوف دورك. غطّي الشاشة عن الباقي وسلّم الجوال.</p>
+<div class="grid">${G.names.map((n,i)=>{const d=G.dealt.includes(i);return`<button class="pl ${d?'done':''}" ${d?'disabled':''} onclick="peek(${i})">${esc(n)}<span>${d?'خذا ورقته':'خوذ ورقتك'}</span></button>`}).join('')}</div>
+${k==G.n?`<button class="btn red" onclick="startNight()">ابدأ الليلة الأولى</button>`:`<p class="mu">${k} من ${G.n} خذوا ورقهم</p>`}`}
+function peek(i){window._r=R[G.roles[i]];
+M(`<p class="mu" style="text-align:center">${esc(G.names[i])}</p>
+<div id="cd" class="cd back" onpointerdown="sh(1)" onpointerup="sh(0)" onpointerleave="sh(0)" onpointercancel="sh(0)" oncontextmenu="return false"><span id="cf">دوس مطوّل تشوف دورك</span></div>
+<button class="btn" onclick="fin(${i})">خلاص — سلّم الجوال</button>`)}
+function sh(v){const c=$('#cd');if(!c)return;const r=window._r;c.className='cd '+(v?'front':'back');c.innerHTML=v?`<b>${r.n}</b><small>${r.d}</small>`:'<span id="cf">دوس مطوّل تشوف دورك</span>'}
+function fin(i){if(!G.dealt.includes(i))G.dealt.push(i);cm();sv();deal()}
+function startNight(){V='game';nightInit();render()}
+
+/* ---------- الليل ---------- */
+const al=()=>G.names.map((_,i)=>i).filter(i=>G.alive[i]);
+function nightInit(){G.phase='night';G.N={};G.s=0;sel=null;const s=[],h=f=>G.roles.some((r,i)=>G.alive[i]&&f(r));
+if(h(r=>r=='mk'||r=='mks'))s.push('kill');
+if(h(r=>r=='ms'||r=='mks'))s.push('sil');
+['doc','grd','inv'].forEach(k=>h(r=>r==k)&&s.push(k));
+if(h(r=>r=='snp')&&!G.used)s.push('snp');
+G.steps=s;sv()}
+const bar=()=>`<div class="fl"></div><div class="bar"><span class="tag">الجولة ${G.round} · باقي ${al().length}</span><button onclick="panel()">لوحة الحكم</button></div>`;
+function night(){const k=G.steps[G.s];
+if(!k){$('#app').innerHTML=bar()+`<h2>الليل خلص</h2><p class="mu">الكل لسا مغمّض عيونه. كي تكون جاهز، قلّهم يفتّحو.</p><button class="btn red" onclick="dawn()">طلّع الفجر</button>`;return}
+const t=SX[k];
+$('#app').innerHTML=bar()+`<h2>${t[0]}</h2><p class="ann">${t[1]}</p>
+<div class="grid">${al().map(i=>`<button class="pl ${sel===i?'sel':''}" onclick="sel=${i};night()">${esc(G.names[i])}</button>`).join('')}</div>
+<button class="btn red" ${sel==null?'disabled':''} onclick="nx(sel)">تمام — يغمّض عينيه</button>
+<button class="btn gold" onclick="nx(null)">${k=='snp'?'يخلّي الرصاصة':'ما حد'}</button>`}
+function nx(v){const k=G.steps[G.s];G.N[k]=v;G.s++;sel=null;sv();
+if(k=='inv'&&v!=null){const m=isM(G.roles[v]);M(`<h2>${esc(G.names[v])}</h2><p class="ann">${m?'مافيا. ارفع إبهامك لفوق للمحقق.':'مو مافيا. نزّل إبهامك للمحقق.'}</p><button class="btn red" onclick="cm();night()">خلاص</button>`);return}
+night()}
+function dawn(){const N=G.N;let d=[];
+if(N.kill!=null&&N.kill!==N.doc){const g=N.kill===N.grd?G.roles.findIndex((r,i)=>r=='grd'&&G.alive[i]):-1;d.push(g>=0?g:N.kill)}
+if(N.snp!=null){G.used=1;const si=G.roles.findIndex((r,i)=>r=='snp'&&G.alive[i]);
+if(isM(G.roles[N.snp]))d.push(N.snp);else if(si>=0)d.push(si)}
+d=[...new Set(d)];d.forEach(i=>G.alive[i]=0);
+G.sil=N.sil!=null&&G.alive[N.sil]?N.sil:-1;
+G.ann=(d.length?`طاح الليلة: ${nm(d)}.`:'ليلة عدّت بسلام، ما مات حد.')+(G.sil>=0?` ${G.names[G.sil]} متسكّت طول النهار.`:'');
+G.log.push(`الجولة ${G.round} — ${G.ann}`);
+if(!chk()){G.phase='day';left=120;G.vt=null;sv();render()}}
+const nm=a=>a.map(i=>G.names[i]+(G.rev?` (${R[G.roles[i]].n})`:'')).join('، ');
+function chk(){const m=G.roles.filter((r,i)=>G.alive[i]&&isM(r)).length,c=G.roles.filter((r,i)=>G.alive[i]&&!isM(r)).length;
+if(!m)return finish('cit');if(m>=c)return finish('maf');return false}
+function nextRound(){G.round++;G.sil=-1;nightInit();render()}
+
+/* ---------- النهار ---------- */
+function day(){
+$('#app').innerHTML=bar()+`<h2>النهار</h2><p class="ann">${esc(G.ann)}</p>
+<div class="card"><div class="tm" id="tm"></div><div class="two"><button class="btn" id="tb" onclick="tgl()">ابدأ النقاش</button><button class="btn gold" onclick="left=120;tm()">من الأول</button></div></div>
+<h3>التصويت</h3><div class="grid">${al().map(i=>`<button class="pl ${G.vt===i?'sel':''}" onclick="G.vt=${i};day()">${esc(G.names[i])}<span>${i==G.sil?'متسكّت':'دوس للتصويت'}</span></button>`).join('')}</div>
+<button class="btn red" ${G.vt==null?'disabled':''} onclick="vote(G.vt)">تأكيد الإقصاء</button>
+<button class="btn gold" onclick="vote(-1)">ما حد يخرج اليوم</button>`;tm()}
+function tm(){const e=$('#tm');if(e)e.textContent=Math.floor(left/60)+':'+String(Math.max(left,0)%60).padStart(2,'0')}
+function tgl(){const b=$('#tb');if(timer){clearInterval(timer);timer=null;b.textContent='كمّل'}
+else{b.textContent='وقّف';timer=setInterval(()=>{left--;tm();if(left<=0){clearInterval(timer);timer=null;b.textContent='خلص الوقت';try{navigator.vibrate(600)}catch(e){}}},1000)}}
+function vote(i){if(timer){clearInterval(timer);timer=null}
+if(i<0){G.log.push(`الجولة ${G.round} — ما حد خرج`);return nextRound()}
+G.alive[i]=0;const r=G.roles[i];G.log.push(`الجولة ${G.round} — طلّعوا ${nm([i])}`);
+if(r=='jok'){G.jn=i;return finish('jok')}
+if(r=='hnt'&&al().length>1){G.phase='hunt';sel=null;sv();return render()}
+if(!chk())nextRound()}
+function hunt(){$('#app').innerHTML=bar()+`<h2>الصيّاد يرد الطلقة</h2><p class="ann">قبل ما يروح، على منو يضرب؟</p>
+<div class="grid">${al().map(i=>`<button class="pl ${sel===i?'sel':''}" onclick="sel=${i};hunt()">${esc(G.names[i])}</button>`).join('')}</div>
+<button class="btn red" ${sel==null?'disabled':''} onclick="shoot(sel)">اضرب</button><button class="btn gold" onclick="shoot(null)">ما يضرب حد</button>`}
+function shoot(v){if(v!=null){G.alive[v]=0;G.log.push(`الجولة ${G.round} — الصيّاد ضرب ${nm([v])}`)}if(!chk())nextRound()}
+
+/* ---------- النهاية ---------- */
+function finish(w){G.phase='end';G.win=w;
+try{const s=st();s.g++;w=='maf'?s.m++:w=='cit'&&s.c++;localStorage.setItem('mafia.st',JSON.stringify(s))}catch(e){}
+sv();render();return true}
+function end(){const w=G.win,T={maf:['المافيا غلبت','الشارع صار لهم'],cit:['الربع غلبو المافيا','المدينة نظيفة'],jok:['المهرج ضحك عليكم',G.names[G.jn]+' طلّعوه بالتصويت']}[w];
+$('#app').innerHTML=`<div class="fl"></div><h1>${T[0]}<small>${T[1]} · ${G.round} جولات · ${Math.max(1,Math.round((Date.now()-G.t0)/60000))} دقيقة</small></h1>
+<div class="card"><h3>الأدوار</h3><table>${G.names.map((n,i)=>`<tr><td>${esc(n)}</td><td>${R[G.roles[i]].n}</td><td>${G.alive[i]?'عايش':'خرج'}</td></tr>`).join('')}</table></div>
+<div class="card"><h3>شن صار</h3>${G.log.map(l=>`<p class="lg">${esc(l)}</p>`).join('')}</div>
+<button class="btn red" onclick="newGame()">جولة جديدة</button><div class="ft">صنع عبدالرحمن محمد ضو</div>`}
+function newGame(){G=null;V='setup';try{localStorage.removeItem('mafia.g')}catch(e){}cm();render()}
+
+/* ---------- لوحة الحكم ---------- */
+function panel(){G.pin?M(`<h3>لوحة الحكم</h3><p class="mu">دخّل الرمز.</p><input id="pp" inputmode="numeric" maxlength="4" placeholder="4 أرقام"><button class="btn red" onclick="unlock()">افتح</button><button class="btn" onclick="cm()">سكّر</button>`):showP()}
+async function unlock(){if(await H($('#pp').value)===G.pin)showP();else toast('الرمز غلط')}
+function showP(){M(`<h3>لوحة الحكم</h3><div class="card"><table>${G.names.map((n,i)=>`<tr style="${G.alive[i]?'':'opacity:.45'}"><td>${esc(n)}</td><td>${R[G.roles[i]].n}</td><td>${G.alive[i]?'عايش':'خرج'}</td></tr>`).join('')}</table></div><button class="btn" onclick="cm()">سكّر</button><button class="btn gold" onclick="if(confirm('تبي تنهي اللعبة؟'))newGame()">أنهي اللعبة</button>`)}
+
+render();
+</script>
+</body>
+</html>
